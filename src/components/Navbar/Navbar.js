@@ -17,7 +17,7 @@ export default function Navbar() {
 				{/* <Logo /> */}
 				<Bars />
 				<NavMenu>
-					<NavLink to='/home'>
+					<NavLink to='/'>
 						Inicio
 					</NavLink>
 					<NavLink to='/testimonios'>
