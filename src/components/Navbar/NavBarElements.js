@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { NavLink as Link } from 'react-router-dom'
+import { NavLink as _NavLink } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
 
 export const Nav = styled.nav`
@@ -12,7 +12,7 @@ export const Nav = styled.nav`
 	max-width: 100%;
 `
 
-export const NavLink = styled(Link)`
+export const NavLink = styled(_NavLink)`
 	color: white;
 	display: flex;
 	align-items: center;
@@ -66,7 +66,7 @@ export const NavBtn = styled.nav`
 	}
 `
 
-export const NavBtnLink = styled(Link)`
+export const NavBtnLink = styled(_NavLink)`
 	border-radius: 10px;
 	background: #C40B0B;
 	padding: 10px 22px;
