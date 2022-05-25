@@ -1,6 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Nav, NavBtn, Bars, NavBtnLink, NavMenu, NavLink } from './NavBarElements'
+import { 
+	Nav, 
+	Bars, 
+	NavBtnLink, 
+	NavMenu, 
+	NavLink 
+} from './NavBarElements'
 
 
 
