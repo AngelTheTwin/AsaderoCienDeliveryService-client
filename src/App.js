@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import {
 	BrowserRouter as Router,
@@ -7,11 +8,19 @@ import {
 import Testimonios from './pages/Testimonios'
 import Informacion from './pages/Informacion'
 import Inicio from './pages/Inicio'
+import DropDownMenu from './components/DropdownMenu/DropdownMenu'
 
 function App() {
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+	const toggleDropdown = () => {
+		setIsDropdownOpen(prevIsOpen => !prevIsOpen)
+	}
+
 	return (
 		<Router>
-			<Navbar />
+			<Navbar toggle={toggleDropdown}/>
+			<DropDownMenu toggle={toggleDropdown} isOpen={isDropdownOpen} />
 			<Routes>
 				<Route index path='/' element={<Inicio />} />
 				<Route path='/testimonios' element={<Testimonios />} />
