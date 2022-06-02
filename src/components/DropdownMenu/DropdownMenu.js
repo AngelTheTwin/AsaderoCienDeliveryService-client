@@ -18,9 +18,33 @@ export default function DropDownMenu( props ) {
 			</Icon>
 			<DropdownWrapper >
 				<DropdownLinksMenu >
-					<DropdownLink to="/" >Inicio</DropdownLink>
-					<DropdownLink to="/testimonios" >Testimonios</DropdownLink>
-					<DropdownLink to="/informacion" >Información</DropdownLink>
+					<DropdownLink 
+						to="inicio" 
+						activeClass='active'
+						spy={true}
+						smooth={true}
+						offset={-80}
+						duration={500}
+						onClick={props.toggle}
+					>Inicio</DropdownLink>
+					<DropdownLink 
+						to="testimonios" 
+						activeClass='active'
+						spy={true}
+						smooth={true}
+						offset={-80}
+						duration={500}
+						onClick={props.toggle}
+					>Testimonios</DropdownLink>
+					<DropdownLink 
+						to="informacion" 
+						activeClass='active'
+						spy={true}
+						smooth={true}
+						offset={-80}
+						duration={500}
+						onClick={props.toggle}
+					>Información</DropdownLink>
 				</DropdownLinksMenu>
 				<DropdownBtnWrap >
 					<DropdownRoute to="/login" >Login</DropdownRoute>

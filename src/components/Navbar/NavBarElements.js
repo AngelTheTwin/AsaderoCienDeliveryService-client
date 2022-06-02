@@ -1,15 +1,19 @@
 import styled from 'styled-components'
 import { NavLink as _NavLink } from 'react-router-dom'
+import { Link } from 'react-scroll'
 import { FaBars } from 'react-icons/fa'
 
 export const Nav = styled.nav`
 	background: black;
-	height: 50px;
+	height: 80px;
 	display: flex;
 	justify-content: space-around;
-	z-index: 999;
-	padding: 10px;
+	margin-top: -80px;
+	padding: 0 16px;
 	max-width: 100%;
+	position: sticky;
+	top: 0;
+	z-index: 999;
 `
 
 export const NavLink = styled(_NavLink)`
@@ -17,7 +21,7 @@ export const NavLink = styled(_NavLink)`
 	display: flex;
 	align-items: center;
 	text-decoration: none;
-	padding: 1rem;
+	padding: 0 1rem;
 	height: 100%;
 	cursor: pointer;
 
@@ -29,6 +33,26 @@ export const NavLink = styled(_NavLink)`
 	&.active{
 		color: #FF0D0F;
 		font-weight: 400;
+	}
+`
+
+export const NavScrollLink = styled(Link)`
+	color: white;
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	padding: 0 1rem;
+	height: 100%;
+	cursor: pointer;
+
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 19px;
+
+	&.active{
+		border-bottom: 3px solid red;
+		margin-bottom: 3px;
 	}
 `
 
