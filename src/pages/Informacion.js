@@ -8,7 +8,7 @@ export default function Informacion() {
 
 	return (
 		<div id="informacion" style={styles}>
-			<h1 style={{margin: 0}} >Informacion</h1>
+			<h1 style={{ margin: 0 }} >Informacion</h1>
 		</div>
 	)
 }

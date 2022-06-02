@@ -8,7 +8,7 @@ export default function Testimonios() {
 
 	return (
 		<div id="testimonios" style={styles}>
-			<h1 style={{margin: 0}} >Testimonios</h1>
+			<h1 style={{ margin: 0 }} >Testimonios</h1>
 		</div>
 	)
 }

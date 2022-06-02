@@ -1,16 +1,16 @@
 import React from "react"
-import { 
-	CloseIcon, 
-	DropdownBtnWrap, 
-	DropdownContainer, 
-	DropdownLink, 
-	DropdownLinksMenu, 
-	DropdownRoute, 
-	DropdownWrapper, 
-	Icon 
+import {
+	CloseIcon,
+	DropdownBtnWrap,
+	DropdownContainer,
+	DropdownLink,
+	DropdownLinksMenu,
+	DropdownRoute,
+	DropdownWrapper,
+	Icon
 } from "./DropdownMenuElements"
 
-export default function DropDownMenu( props ) {
+export default function DropDownMenu(props) {
 	return (
 		<DropdownContainer isOpen={props.isOpen} onClick={props.toggle} >
 			<Icon>
@@ -18,8 +18,8 @@ export default function DropDownMenu( props ) {
 			</Icon>
 			<DropdownWrapper >
 				<DropdownLinksMenu >
-					<DropdownLink 
-						to="inicio" 
+					<DropdownLink
+						to="inicio"
 						activeClass='active'
 						spy={true}
 						smooth={true}
@@ -27,8 +27,8 @@ export default function DropDownMenu( props ) {
 						duration={500}
 						onClick={props.toggle}
 					>Inicio</DropdownLink>
-					<DropdownLink 
-						to="testimonios" 
+					<DropdownLink
+						to="testimonios"
 						activeClass='active'
 						spy={true}
 						smooth={true}
@@ -36,8 +36,8 @@ export default function DropDownMenu( props ) {
 						duration={500}
 						onClick={props.toggle}
 					>Testimonios</DropdownLink>
-					<DropdownLink 
-						to="informacion" 
+					<DropdownLink
+						to="informacion"
 						activeClass='active'
 						spy={true}
 						smooth={true}
