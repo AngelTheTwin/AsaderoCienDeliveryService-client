@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { FaTimes } from 'react-icons/fa'
 import { NavLink } from 'react-router-dom'
+import { Link } from 'react-scroll'
 
 export const DropdownContainer = styled.aside`
 	position: fixed;
@@ -34,7 +35,7 @@ export const DropdownWrapper = styled.div`
 	color: #fff;
 `
 
-export const DropdownLink = styled(NavLink)`
+export const DropdownLink = styled(Link)`
 	display: flex;
 	align-items: center;
 	justify-content: center;
