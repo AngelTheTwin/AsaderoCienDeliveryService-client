@@ -11,6 +11,15 @@ import {
 } from "./DropdownMenuElements"
 
 export default function DropDownMenu(props) {
+	const dropDownLinkProps = {
+		activeClass: 'active',
+		spy: true,
+		smooth: true,
+		offset: -80,
+		duration: 500,
+		onClick: props.toggle,
+	}
+
 	return (
 		<DropdownContainer isOpen={props.isOpen} onClick={props.toggle} >
 			<Icon>
@@ -20,30 +29,15 @@ export default function DropDownMenu(props) {
 				<DropdownLinksMenu >
 					<DropdownLink
 						to="inicio"
-						activeClass='active'
-						spy={true}
-						smooth={true}
-						offset={-80}
-						duration={500}
-						onClick={props.toggle}
+						{ ...dropDownLinkProps }
 					>Inicio</DropdownLink>
 					<DropdownLink
 						to="testimonios"
-						activeClass='active'
-						spy={true}
-						smooth={true}
-						offset={-80}
-						duration={500}
-						onClick={props.toggle}
+						{ ...dropDownLinkProps }
 					>Testimonios</DropdownLink>
 					<DropdownLink
 						to="informacion"
-						activeClass='active'
-						spy={true}
-						smooth={true}
-						offset={-80}
-						duration={500}
-						onClick={props.toggle}
+						{ ...dropDownLinkProps }
 					>Información</DropdownLink>
 				</DropdownLinksMenu>
 				<DropdownBtnWrap >

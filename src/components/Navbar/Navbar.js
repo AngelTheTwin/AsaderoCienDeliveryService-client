@@ -8,33 +8,29 @@ import {
 } from './NavBarElements'
 
 export default function Navbar(props) {
+	const linkProps = {
+		activeClass: 'active',
+		spy: true,
+		smooth: true,
+		offset: -80,
+		duration: 500,
+	}
+
 	return (
 		<Nav >
 			<Bars onClick={props.toggle} />
 			<NavMenu>
 				<NavScrollLink
 					to='inicio'
-					activeClass='active'
-					spy={true}
-					smooth={true}
-					offset={-80}
-					duration={500}
+					{ ...linkProps }
 				>Inicio</NavScrollLink>
 				<NavScrollLink
 					to='testimonios'
-					activeClass='active'
-					spy={true}
-					smooth={true}
-					offset={-80}
-					duration={500}
+					{ ...linkProps }
 				>Testimonios</NavScrollLink>
 				<NavScrollLink
 					to='informacion'
-					activeClass='active'
-					spy={true}
-					smooth={true}
-					offset={-80}
-					duration={500}
+					{ ...linkProps }
 				>Información</NavScrollLink>
 				<NavBtnLink to='/login'>Iniciar Sesión</NavBtnLink>
 			</NavMenu>
