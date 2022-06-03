@@ -5,14 +5,15 @@ import {
 	Route,
 } from 'react-router-dom'
 import { LandingPage } from './pages/LandingPage'
+import { Login } from './pages/Login/Login'
 
 function App() {
 
 	return (
 		<Router>
 			<Routes>
-				<Route index element={<LandingPage />} />
-				<Route path='/login' element={<h1>Login</h1>} />
+				<Route index path='/' element={<LandingPage />} />
+				<Route path='/login' element={<Login />} />
 			</Routes>
 		</Router>
 	)
