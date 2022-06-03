@@ -39,7 +39,7 @@ export default function Testimonios() {
 
 		  	<SwiperSlide>
 				<Tarjeta>
-					<Comentario>“Un lugar muy agradable, con muy buenos platillos. Variedad de cortes, ensaladas y hasta pizzas al horno. Hay también desayuno buffet. El personal es muy atento y amable, siempre al pendiente de los clientes. Definitivamente es recomendable”.</Comentario>
+					<Comentario>“Somos clientes asiduos, mis papás y yo, de la sucursal de El Dorado. El servicio es excelente, todo se encuentra en orden y siempre es un placer volver”.</Comentario>
 					<Nombre>Angel de Jesús Sánchez Morales</Nombre>
 					</Tarjeta> 
 				<Img src={imagenAngel}/>
@@ -47,7 +47,7 @@ export default function Testimonios() {
 
 			<SwiperSlide>
 				<Tarjeta>
-					<Comentario>“Un lugar muy agradable, con muy buenos platillos. Variedad de cortes, ensaladas y hasta pizzas al horno. Hay también desayuno buffet. El personal es muy atento y amable, siempre al pendiente de los clientes. Definitivamente es recomendable”.</Comentario>
+					<Comentario>“Excelentes carnes, hamburguesas y el inmejorable trato en renta de sus salones”.</Comentario>
 					<Nombre>José Damián Mendoza Carmona</Nombre>
 					</Tarjeta> 
 				<Img src={imagenDamian}/>
@@ -55,7 +55,7 @@ export default function Testimonios() {
 
 			<SwiperSlide>
 				<Tarjeta>
-					<Comentario>“Un lugar muy agradable, con muy buenos platillos. Variedad de cortes, ensaladas y hasta pizzas al horno. Hay también desayuno buffet. El personal es muy atento y amable, siempre al pendiente de los clientes. Definitivamente es recomendable”.</Comentario>
+					<Comentario>“Muy rico y buen servicio :D”.</Comentario>
 					<Nombre>Abner Jeffrey Tapia Cruz</Nombre>
 				</Tarjeta> 
 				<Img src={imagenAbner}/>

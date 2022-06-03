@@ -7,7 +7,7 @@ import 'react-phone-number-input/style.css'
 import imagen from '../../assets/logo-blanco.svg'
 
 export const LoginContent = styled.div`
-font-family: 'Secular one';
+	font-family: 'Secular one';
 	background: #0F0F0F;
 	margin: 0;
 	top: auto;

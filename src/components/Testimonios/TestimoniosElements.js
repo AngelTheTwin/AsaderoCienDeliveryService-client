@@ -8,9 +8,9 @@ export const Tarjeta = styled.div`
 `
 
 export const Title = styled.h1`
-    color: #000;
     margin: 5%;
     text-align:center;
+    font-family: 'Secular one';
 `
 
 export const Img = styled.img`
@@ -27,12 +27,14 @@ export const Comentario = styled.p`
     margin-right: 5%;
     color: #FFFF;
     font-size: 90%;
+    font-family: 'ABeeZee';
 `
 
-export const Nombre = styled.p`
+export const Nombre = styled.p `
     margin-top: 15%;
     margin-left: 5%;
     margin-right: 5%;
     color: #FFFF;
     font-size: 70%;
+    font-family: 'ABeeZee';
 `
