@@ -16,6 +16,18 @@ export const Nav = styled.nav`
 	z-index: 999;
 `
 
+export const Title = styled.h4`
+	display: none;
+	@media screen and (max-width: 768px) {
+		font-family: 'ABeeZee';
+		display: block;
+		align-self: center;
+		text-align: center;
+		max-width: 70%;
+		margin: 0;
+	}
+`
+
 export const NavLink = styled(_NavLink)`
 	color: white;
 	display: flex;

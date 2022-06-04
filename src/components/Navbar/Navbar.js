@@ -4,7 +4,8 @@ import {
 	Bars,
 	NavBtnLink,
 	NavMenu,
-	NavScrollLink
+	NavScrollLink,
+	Title
 } from './NavBarElements'
 
 export default function Navbar(props) {
@@ -18,6 +19,7 @@ export default function Navbar(props) {
 
 	return (
 		<Nav >
+			<Title >Asadero Cien - Restaurante Parrilla</Title>
 			<Bars onClick={props.toggle} />
 			<NavMenu>
 				<NavScrollLink

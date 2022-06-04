@@ -68,7 +68,7 @@ export const Grid = styled.nav`
 export const ImgContainer = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-end;
 `
 
 export const Img = styled.img.attrs({
