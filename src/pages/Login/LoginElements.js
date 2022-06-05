@@ -10,11 +10,12 @@ export const LoginContent = styled.div`
 	margin: 0;
 	top: auto;
 	width: 100%;
-	height: 100%;
+	height: calc(100% - 70px);
 	color: white;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding-top: 70px;
 `
 
 export const Navbar = styled.nav`
@@ -47,16 +48,18 @@ export const BackIcon = styled(BiArrowBack)`
 `
 
 export const Title = styled.h4`
-	margin: 0;
+	/* margin: 0; */
 `
 
-export const Grid = styled.nav`
-	margin-top: 70px;
+export const Grid = styled.div`
+/* padding-top: 110px; */
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	padding: 16px;
+	padding-left: 16px;
+	padding-right: 16px;
 	width: 100%;
 	max-width: 1500px;
+	height: 100%;
 
 	@media screen and (max-width: 768px) {
 		grid-template-columns: 1fr;
@@ -81,6 +84,15 @@ export const Img = styled.img.attrs({
 	@media screen and (max-width: 768px) {
 		display: none;
 	}
+`
+
+export const FormContainer = styled.div`
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 16px;
 `
 
 export const Form = styled.div`
@@ -235,7 +247,6 @@ export const FormLogin = styled.div`
 	opacity: ${({ etapaLogin }) => (etapaLogin == 'login' ? '100%' : '0%')};
 	position: ${({ etapaLogin }) => (etapaLogin == 'login' ? 'relative' : 'absolute')};
 	right: ${({ etapaLogin }) => (etapaLogin == 'login' ? '0' : '-100%')};
-	/* height: ${({ etapaLogin }) => (etapaLogin !== 'login' ? '0' : '100%')}; */
 `
 
 export const FormRegistro = styled(Form)`
@@ -243,7 +254,6 @@ export const FormRegistro = styled(Form)`
 	opacity: ${({ etapaLogin }) => (etapaLogin == 'registro' ? '100%' : '0%')};
 	position: ${({ etapaLogin }) => (etapaLogin == 'registro' ? 'relative' : 'fixed')};
 	left: ${({ etapaLogin }) => (etapaLogin == 'registro' ? '0' : '-100%')};
-	height: ${({ etapaLogin }) => (etapaLogin !== 'registro' ? '0' : '100%')};
 `
 
 export const ButtonLog = styled(NavLink)`

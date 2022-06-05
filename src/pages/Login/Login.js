@@ -9,6 +9,7 @@ import {
 	DividerTxt,
 	Enlace,
 	Form,
+	FormContainer,
 	FormLogin,
 	FormRegistro,
 	Grid,
@@ -32,7 +33,6 @@ export const Login = () => {
 	const [etapaLogin, setEtapaLogin] = useState('login')
 	const [showLogin, setShowLogin] = useState(true)
 	const titulo = etapaLogin !== 'login' ? 'Regístrate' : 'Iniciar Sesión'
-	console.log(etapaLogin)
 
 	return (
 		<LoginContent>
@@ -46,7 +46,7 @@ export const Login = () => {
 				<ImgContainer>
 					<Img />
 				</ImgContainer>
-				<Form >
+				<FormContainer >
 					<Label>{titulo}</Label>
 					<LoginButtons >
 						<LoginWithButton variante='facebook' />
@@ -59,17 +59,18 @@ export const Login = () => {
 						<Line />
 					</Divider>
 					<Form>
-						<FormularioLogin
+						{showLogin && <FormularioLogin
 							etapaLogin={etapaLogin}
 							setEtapaLogin={setEtapaLogin}
-						></FormularioLogin>
+							setShowLogin={setShowLogin}
+						></FormularioLogin>}
 						<FormularioRegistro
 							etapaLogin={etapaLogin}
 							setEtapaLogin={setEtapaLogin}
 						/>
 					</Form>
 
-				</Form>
+				</FormContainer>
 			</Grid>
 		</LoginContent>
 	)
@@ -96,6 +97,9 @@ export function FormularioLogin(props) {
 				<Enlace
 					onClick={() => {
 						props.setEtapaLogin('registro')
+						setTimeout(() => {
+							props.setShowLogin(false)
+						}, 700)
 					}}
 				>Registrate aquí</Enlace>
 			</Registro>
