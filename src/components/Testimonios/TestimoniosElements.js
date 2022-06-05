@@ -2,9 +2,11 @@ import styled from "styled-components"
 
 export const Tarjeta = styled.div`
     width: 60%;
-	height: fit-content;
+	height: 60%;
     background-color: #222222;
     border-radius: 5%;
+	display: flex;
+	flex-direction: column;
 
 	@media screen and (max-width: 768px) {
 		width: 80%;
@@ -42,7 +44,7 @@ export const Comentario = styled.p`
 `
 
 export const Nombre = styled.p`
-    margin-top: 15%;
+    margin-top: auto;
     margin-left: 5%;
     margin-right: 5%;
     color: #FFFF;
