@@ -2,14 +2,14 @@ import styled from "styled-components"
 
 export const Tarjeta = styled.div`
     width: 60%;
-	height: 60%;
+	height: 90%;
     background-color: #222222;
-    border-radius: 5%;
+    border-radius: 20px;
 	display: flex;
 	flex-direction: column;
 
 	@media screen and (max-width: 768px) {
-		width: 80%;
+		width: 90%;
 	}
 `
 

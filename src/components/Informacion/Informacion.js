@@ -2,7 +2,7 @@ import React from "react"
 
 export default function Informacion() {
 	const styles = {
-		height: '1500px',
+		height: '500px',
 		margin: 0
 	}
 
