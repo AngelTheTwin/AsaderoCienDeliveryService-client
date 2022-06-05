@@ -21,3 +21,19 @@
 	-ms-flex-align: center;
 	margin-top: 7.5em;
 }
+
+.swiper-pagination-bullet-active-main{
+	background-color: #C40C0C;
+}
+
+.swiper-pagination-bullet-active-prev{
+	background-color: #ffffff;
+}
+
+.swiper-pagination-bullet-active-prev-prev{
+	background-color: #ffffff;
+}
+
+.swiper-pagination-bullet-active-next{
+	background-color: #ffffff;
+}
