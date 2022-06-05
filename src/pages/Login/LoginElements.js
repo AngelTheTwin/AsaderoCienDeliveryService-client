@@ -4,8 +4,6 @@ import { BiArrowBack } from 'react-icons/bi'
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
 
-import imagen from '../../assets/logo-blanco.svg'
-
 export const LoginContent = styled.div`
 	height: 100%;
 	font-family: 'Secular one';
@@ -72,7 +70,7 @@ export const ImgContainer = styled.div`
 `
 
 export const Img = styled.img.attrs({
-	src: imagen
+	src: require('../../assets/logo-blanco.png')
 })`
 	color: white;
 	aspect-ratio: 1/1;

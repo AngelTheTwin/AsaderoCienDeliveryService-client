@@ -1,43 +1,36 @@
 import React, { useState } from 'react'
-import { 
-	AppleButton, 
-	BackButton, 
-	BackIcon, 
-	Button, 
-	ButtonsContainer, 
-	Divider, 
-	DividerTxt, 
-	Enlace, 
-	FacebookButton, 
-	Form, 
-	GoogleButton, 
-	Grid, 
-	Icon, 
-	Img, 
-	ImgContainer, 
-	Label, 
-	Line, 
-	LoginButtons, 
-	LoginContent, 
-	Navbar, 
-	Registro, 
-	TelefonoTextField, 
-	Title, 
+import {
+	AppleButton,
+	BackButton,
+	BackIcon,
+	Button,
+	ButtonsContainer,
+	Divider,
+	DividerTxt,
+	Enlace,
+	FacebookButton,
+	Form,
+	GoogleButton,
+	Grid,
+	Icon,
+	Img,
+	ImgContainer,
+	Label,
+	Line,
+	LoginButtons,
+	LoginContent,
+	Navbar,
+	Registro,
+	TelefonoTextField,
+	Title,
 } from './LoginElements'
-
-import iconoFacebook from '../../assets/facebook-icon.svg'
-import iconoGoogle from '../../assets/google-icon.svg'
-import iconoApple from '../../assets/apple-icon.svg'
-import iconoFacebookHover from '../../assets/facebook-icon-azul.svg'
-import iconoGoogleHover from '../../assets/google-icon-rojo.svg'
-import iconoAppleHover from '../../assets/apple-icon-gris.svg'
 
 export const Login = () => {
 	const [telefono, setTelefono] = useState('')
 	const [estiloBotones, setEstiloBotones] = useState({
-		facebook: iconoFacebook,
-		google: iconoGoogle,
-		apple: iconoApple
+		facebook: icons.facebook.normal,
+		google: icons.facebook.normal,
+		apple: icons.facebook.normal
 	})
 
 	return (
@@ -55,41 +48,53 @@ export const Login = () => {
 				<Form >
 					<Label>Iniciar Sesión</Label>
 					<LoginButtons >
-						<FacebookButton 
-							onMouseEnter= {() => { setEstiloBotones({
-								...estiloBotones,
-								facebook: iconoFacebookHover
-							})}}
-							onMouseLeave= {() => { setEstiloBotones({
-								...estiloBotones,
-								facebook: iconoFacebook
-							})}}
+						<FacebookButton
+							onMouseEnter={() => {
+								setEstiloBotones({
+									...estiloBotones,
+									facebook: icons.facebook.hover
+								})
+							}}
+							onMouseLeave={() => {
+								setEstiloBotones({
+									...estiloBotones,
+									facebook: icons.facebook.normal
+								})
+							}}
 						>
 							<Icon src={estiloBotones.facebook} />
 							Continuar con Facebook
 						</FacebookButton>
-						<GoogleButton  
-							onMouseEnter= {() => { setEstiloBotones({
-								...estiloBotones,
-								google: iconoGoogleHover
-							})}}
-							onMouseLeave= {() => { setEstiloBotones({
-								...estiloBotones,
-								google: iconoGoogle
-							})}}
+						<GoogleButton
+							onMouseEnter={() => {
+								setEstiloBotones({
+									...estiloBotones,
+									google: icons.google.hover
+								})
+							}}
+							onMouseLeave={() => {
+								setEstiloBotones({
+									...estiloBotones,
+									google: icons.google.normal
+								})
+							}}
 						>
 							<Icon src={estiloBotones.google} />
 							Continuar con Google
 						</GoogleButton>
-						<AppleButton 
-							onMouseEnter= {() => { setEstiloBotones({
-								...estiloBotones,
-								apple: iconoAppleHover
-							})}}
-							onMouseLeave= {() => { setEstiloBotones({
-								...estiloBotones,
-								apple: iconoApple
-							})}}
+						<AppleButton
+							onMouseEnter={() => {
+								setEstiloBotones({
+									...estiloBotones,
+									apple: icons.apple.hover
+								})
+							}}
+							onMouseLeave={() => {
+								setEstiloBotones({
+									...estiloBotones,
+									apple: icons.apple.normal
+								})
+							}}
 						>
 							<Icon src={estiloBotones.apple} />
 							Continuar con Apple
@@ -104,7 +109,7 @@ export const Login = () => {
 						international
 						placeholder='Escribe tu numero'
 						value={telefono}
-						onChange={ setTelefono }
+						onChange={setTelefono}
 					/>
 					<ButtonsContainer >
 						<Button>SMS</Button>
@@ -117,4 +122,19 @@ export const Login = () => {
 			</Grid>
 		</LoginContent>
 	)
+}
+
+const icons = {
+	facebook: {
+		normal: require('../../assets/facebook-icon.png'),
+		hover: require('../../assets/facebook-icon-hover.png')
+	},
+	google: {
+		normal: require('../../assets/google-icon.png'),
+		hover: require('../../assets/google-icon-hover.png')
+	},
+	apple: {
+		normal: require('../../assets/apple-icon.png'),
+		hover: require('../../assets/apple-icon-hover.png')
+	},
 }

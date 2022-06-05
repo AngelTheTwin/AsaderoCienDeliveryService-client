@@ -1,9 +1,8 @@
-import styled from "styled-components"
-import imagen from "../../assets/logo.svg"
+import styled from 'styled-components'
 
 
 export const Img = styled.img.attrs({
-    src: imagen
+    src: require('../../assets/Portada.png')
 })`
     margin-top: 60px;
     width: 100%;
