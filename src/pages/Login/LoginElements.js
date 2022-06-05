@@ -159,6 +159,8 @@ export const ButtonsContainer = styled.nav`
 `
 
 export const Button = styled.button`
+	font-family: 'ABeeZee';
+	font-size: small;
 	background-color: #C40B0B;
 	color: white;
 	border-radius: 10px;
