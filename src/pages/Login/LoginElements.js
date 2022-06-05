@@ -105,7 +105,6 @@ export const LoginButtons = styled.div`
 `
 
 export const Icon = styled.img`
-	aspect-ratio: 1/1;
 	height: 24px;
 	margin-right: 10px;
 `

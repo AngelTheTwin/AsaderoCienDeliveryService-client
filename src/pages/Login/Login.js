@@ -29,8 +29,8 @@ export const Login = () => {
 	const [telefono, setTelefono] = useState('')
 	const [estiloBotones, setEstiloBotones] = useState({
 		facebook: icons.facebook.normal,
-		google: icons.facebook.normal,
-		apple: icons.facebook.normal
+		google: icons.google.normal,
+		apple: icons.apple.normal
 	})
 
 	return (
