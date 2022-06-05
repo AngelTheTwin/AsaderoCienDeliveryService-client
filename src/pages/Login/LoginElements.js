@@ -109,63 +109,6 @@ export const Icon = styled.img`
 	margin-right: 10px;
 `
 
-export const FacebookButton = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	width: 330px;
-	height: 60px;
-	background: #3B5998;
-	border-radius: 10px;
-	cursor: pointer;
-	transition: 0.2s ease-in-out;
-
-	&:hover{
-		color: #3B5998;
-		background-color: white;
-		transition: 0.2s ease-in-out;
-	}
-`
-
-export const GoogleButton = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	width: 330px;
-	height: 60px;
-	background: #C62D2D;
-	border-radius: 10px;
-	cursor: pointer;
-	transition: 0.2s ease-in-out;
-
-	&:hover{
-		color: #C62D2D;
-		background-color: white;
-		transition: 0.2s ease-in-out;
-	}
-`
-
-export const AppleButton = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	width: 330px;
-	height: 60px;
-	background: #2E2C36;
-	border-radius: 10px;
-	cursor: pointer;
-	transition: 0.2s ease-in-out;
-
-	&:hover{
-		color: #2E2C36;
-		background-color: white;
-		transition: 0.2s ease-in-out;
-	}
-`
-
 export const Divider = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -245,6 +188,25 @@ export const Enlace = styled(NavLink)`
 
 	&:hover{
 		color: white;
+		transition: 0.2s ease-in-out;
+	}
+`
+
+export const LoginButton = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 330px;
+	height: 60px;
+	background: ${ ({color}) => color };
+	border-radius: 10px;
+	cursor: pointer;
+	transition: 0.2s ease-in-out;
+
+	&:hover{
+		color: ${ ({color}) => color };
+		background-color: white;
 		transition: 0.2s ease-in-out;
 	}
 `

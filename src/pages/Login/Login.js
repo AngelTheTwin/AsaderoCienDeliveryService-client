@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import {
-	AppleButton,
 	BackButton,
 	BackIcon,
 	Button,
@@ -8,15 +7,14 @@ import {
 	Divider,
 	DividerTxt,
 	Enlace,
-	FacebookButton,
 	Form,
-	GoogleButton,
 	Grid,
 	Icon,
 	Img,
 	ImgContainer,
 	Label,
 	Line,
+	LoginButton,
 	LoginButtons,
 	LoginContent,
 	Navbar,
@@ -27,11 +25,23 @@ import {
 
 export const Login = () => {
 	const [telefono, setTelefono] = useState('')
-	const [estiloBotones, setEstiloBotones] = useState({
-		facebook: icons.facebook.normal,
-		google: icons.google.normal,
-		apple: icons.apple.normal
-	})
+	const [loginButtons, setLoginButtons] = useState([
+		{
+			color: '#3B5998',
+			nombre: 'Facebook',
+			img: require('../../assets/facebook-icon.png')
+		},
+		{
+			color: '#C62D2D',
+			nombre: 'Google',
+			img: require('../../assets/google-icon.png')
+		},
+		{
+			color: '#2E2C36',
+			nombre: 'Apple',
+			img: require('../../assets/apple-icon.png')
+		},
+	])
 
 	return (
 		<LoginContent>
@@ -48,57 +58,37 @@ export const Login = () => {
 				<Form >
 					<Label>Iniciar Sesión</Label>
 					<LoginButtons >
-						<FacebookButton
-							onMouseEnter={() => {
-								setEstiloBotones({
-									...estiloBotones,
-									facebook: icons.facebook.hover
-								})
-							}}
-							onMouseLeave={() => {
-								setEstiloBotones({
-									...estiloBotones,
-									facebook: icons.facebook.normal
-								})
-							}}
-						>
-							<Icon src={estiloBotones.facebook} />
-							Continuar con Facebook
-						</FacebookButton>
-						<GoogleButton
-							onMouseEnter={() => {
-								setEstiloBotones({
-									...estiloBotones,
-									google: icons.google.hover
-								})
-							}}
-							onMouseLeave={() => {
-								setEstiloBotones({
-									...estiloBotones,
-									google: icons.google.normal
-								})
-							}}
-						>
-							<Icon src={estiloBotones.google} />
-							Continuar con Google
-						</GoogleButton>
-						<AppleButton
-							onMouseEnter={() => {
-								setEstiloBotones({
-									...estiloBotones,
-									apple: icons.apple.hover
-								})
-							}}
-							onMouseLeave={() => {
-								setEstiloBotones({
-									...estiloBotones,
-									apple: icons.apple.normal
-								})
-							}}
-						>
-							<Icon src={estiloBotones.apple} />
-							Continuar con Apple
-						</AppleButton>
+						{loginButtons.map(button => {
+							return (
+								<LoginButton
+									key={button.nombre}
+									color={button.color}
+									onMouseEnter={() => {
+										setLoginButtons(prevLoginButtons => prevLoginButtons.map(prevButton => {
+											return {
+												...prevButton,
+												img: (prevButton.nombre === button.nombre)
+													? require(`../../assets/${button.nombre.toLowerCase()}-icon-hover.png`)
+													: prevButton.img
+											}
+										}))
+									}}
+									onMouseLeave={() => {
+										setLoginButtons(prevLoginButtons => prevLoginButtons.map(prevButton => {
+											return {
+												...prevButton,
+												img: (prevButton.nombre === button.nombre)
+													? require(`../../assets/${button.nombre.toLowerCase()}-icon.png`)
+													: prevButton.img
+											}
+										}))
+									}}
+								>
+									<Icon src={button.img} />
+									Continuar con {button.nombre}
+								</LoginButton>
+							)
+						})}
 					</LoginButtons>
 					<Divider >
 						<Line />
@@ -122,19 +112,4 @@ export const Login = () => {
 			</Grid>
 		</LoginContent>
 	)
-}
-
-const icons = {
-	facebook: {
-		normal: require('../../assets/facebook-icon.png'),
-		hover: require('../../assets/facebook-icon-hover.png')
-	},
-	google: {
-		normal: require('../../assets/google-icon.png'),
-		hover: require('../../assets/google-icon-hover.png')
-	},
-	apple: {
-		normal: require('../../assets/apple-icon.png'),
-		hover: require('../../assets/apple-icon-hover.png')
-	},
 }
