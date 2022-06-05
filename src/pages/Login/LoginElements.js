@@ -84,14 +84,16 @@ export const Img = styled.img.attrs({
 `
 
 export const Form = styled.div`
+	height: fit-content;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	gap: 16px;
 `
 
 export const Label = styled.label.attrs({
-	
+
 })`
 	font-weight: 500;
 	font-size: 50px;
@@ -114,7 +116,6 @@ export const Divider = styled.div`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	margin: 10px 0;
 `
 
 export const Line = styled.div`
@@ -137,7 +138,6 @@ export const TelefonoTextField = styled(PhoneInput).attrs({
 	width: 330px;
 	line-height: normal;
 	--PhoneInputCountryFlag-height:20px;
-	margin-bottom: 20px;
 
 	&>input{
 		font-size: 16px;
@@ -184,7 +184,7 @@ export const Registro = styled.div`
 	gap: 5px;
 `
 
-export const Enlace = styled(NavLink)`
+export const Enlace = styled.span`
 	color: green;
 	text-decoration: none;
 
@@ -201,13 +201,69 @@ export const LoginButton = styled.div`
 	align-items: center;
 	width: 330px;
 	height: 60px;
-	background: ${ ({color}) => color };
+	background: ${({ color }) => color};
 	border-radius: 10px;
 	cursor: pointer;
 	transition: 0.2s ease-in-out;
 
 	&:hover{
-		color: ${ ({color}) => color };
+		color: ${({ color }) => color};
+		background-color: white;
+		transition: 0.2s ease-in-out;
+	}
+`
+
+export const TextField = styled.input.attrs({
+})`
+	width: 314px;
+	font-size: 16px;
+	margin-left: 5px;
+	background-color: black;
+	padding: 8px;
+	padding-bottom: 8px;
+	border-radius: 10px;
+	color: white;
+`
+
+export const FormLogin = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+	transition: 1s ease-in-out;
+	opacity: ${({ etapaLogin }) => (etapaLogin == 'login' ? '100%' : '0%')};
+	position: ${({ etapaLogin }) => (etapaLogin == 'login' ? 'relative' : 'absolute')};
+	right: ${({ etapaLogin }) => (etapaLogin == 'login' ? '0' : '-100%')};
+	/* height: ${({ etapaLogin }) => (etapaLogin !== 'login' ? '0' : '100%')}; */
+`
+
+export const FormRegistro = styled(Form)`
+	transition: 1s ease-in-out;
+	opacity: ${({ etapaLogin }) => (etapaLogin == 'registro' ? '100%' : '0%')};
+	position: ${({ etapaLogin }) => (etapaLogin == 'registro' ? 'relative' : 'fixed')};
+	left: ${({ etapaLogin }) => (etapaLogin == 'registro' ? '0' : '-100%')};
+	height: ${({ etapaLogin }) => (etapaLogin !== 'registro' ? '0' : '100%')};
+`
+
+export const ButtonLog = styled(NavLink)`
+	font-family: 'ABeeZee';
+	font-size: small;
+	background-color: #C40B0B;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	border-radius: 10px;
+	border: none;
+	padding: 10px;
+	width: 100%;
+	cursor: pointer;
+	transition: 0.2s ease-in-out;
+	text-decoration: none;
+
+	&:hover{
+		color: black;
 		background-color: white;
 		transition: 0.2s ease-in-out;
 	}

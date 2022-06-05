@@ -3,30 +3,36 @@ import {
 	BackButton,
 	BackIcon,
 	Button,
+	ButtonLog,
 	ButtonsContainer,
 	Divider,
 	DividerTxt,
 	Enlace,
 	Form,
+	FormLogin,
+	FormRegistro,
 	Grid,
-	Icon,
 	Img,
 	ImgContainer,
 	Label,
 	Line,
-	LoginButton,
 	LoginButtons,
 	LoginContent,
 	Navbar,
 	Registro,
 	TelefonoTextField,
+	TextField,
 	Title,
 } from './LoginElements'
+import { LoginWithButton } from './LoginWithButton'
 
 
 
 export const Login = () => {
-	const [telefono, setTelefono] = useState('')
+	const [etapaLogin, setEtapaLogin] = useState('login')
+	const [showLogin, setShowLogin] = useState(true)
+	const titulo = etapaLogin !== 'login' ? 'Regístrate' : 'Iniciar Sesión'
+	console.log(etapaLogin)
 
 	return (
 		<LoginContent>
@@ -41,7 +47,7 @@ export const Login = () => {
 					<Img />
 				</ImgContainer>
 				<Form >
-					<Label>Iniciar Sesión</Label>
+					<Label>{titulo}</Label>
 					<LoginButtons >
 						<LoginWithButton variante='facebook' />
 						<LoginWithButton variante='google' />
@@ -52,66 +58,80 @@ export const Login = () => {
 						<DividerTxt >o</DividerTxt>
 						<Line />
 					</Divider>
-					<TelefonoTextField
-						international
-						placeholder='Escribe tu numero'
-						value={telefono}
-						onChange={setTelefono}
-					/>
-					<ButtonsContainer >
-						<Button>SMS</Button>
-						<Button>Whastapp</Button>
-					</ButtonsContainer>
-					<Registro >
-						¿Aún no te has registrado? <Enlace to=''>Registrate aquí</Enlace>
-					</Registro>
+					<Form>
+						<FormularioLogin
+							etapaLogin={etapaLogin}
+							setEtapaLogin={setEtapaLogin}
+						></FormularioLogin>
+						<FormularioRegistro
+							etapaLogin={etapaLogin}
+							setEtapaLogin={setEtapaLogin}
+						/>
+					</Form>
+
 				</Form>
 			</Grid>
 		</LoginContent>
 	)
 }
 
-function LoginWithButton({ variante }) {
-	const variantes = {
-		default: {
-			color: 'gray',
-			nombre: 'Default',
-			img: '',
-			imgHover: '',
-		},
-		facebook: {
-			color: '#3B5998',
-			nombre: 'Facebook',
-			img: require('../../assets/facebook-icon.png'),
-			imgHover: require('../../assets/facebook-icon-hover.png')
-		},
-		google: {
-			color: '#C62D2D',
-			nombre: 'Google',
-			img: require('../../assets/google-icon.png'),
-			imgHover: require('../../assets/google-icon-hover.png')
-		},
-		apple: {
-			color: '#2E2C36',
-			nombre: 'Apple',
-			img: require('../../assets/apple-icon.png'),
-			imgHover: require('../../assets/apple-icon-hover.png')
-		}
-	}
-	variante = variantes.hasOwnProperty(variante) ? variante : 'default'
-	const [icono, setIcono] = useState(variantes[variante].img)
+export function FormularioLogin(props) {
 	return (
-		<LoginButton
-			color={variantes[variante].color}
-			onMouseEnter={() => {
-				setIcono(variantes[variante].imgHover)
-			}}
-			onMouseLeave={() => {
-				setIcono(variantes[variante].img)
-			}}
+		<FormLogin
+			etapaLogin={props.etapaLogin}
 		>
-			<Icon src={icono} />
-			Continuar con {variantes[variante].nombre}
-		</LoginButton>
+			<TextField
+				placeholder='Correo'
+				type='email'
+			/>
+			<TextField
+				placeholder='Contraseña'
+				type='password'
+			/>
+			<ButtonsContainer >
+				<ButtonLog to='/home'>Iniciar Sesión</ButtonLog>
+			</ButtonsContainer>
+			<Registro >
+				<span>¿Aún no te has registrado? </span>
+				<Enlace
+					onClick={() => {
+						props.setEtapaLogin('registro')
+					}}
+				>Registrate aquí</Enlace>
+			</Registro>
+		</FormLogin>
+	)
+}
+
+function FormularioRegistro(props) {
+	const [telefono, setTelefono] = useState('')
+	return (
+		<FormRegistro
+			etapaLogin={props.etapaLogin}
+		>
+			<TextField
+				placeholder='Nombre'
+			/>
+			<TextField
+				placeholder='Apellido'
+			/>
+			<TextField
+				placeholder='Correo Electronico'
+				type='email'
+			/>
+			<TelefonoTextField
+				international
+				placeholder='Escribe tu numero'
+				value={telefono}
+				onChange={setTelefono}
+			/>
+			<TextField
+				placeholder='Contraseña'
+				type='password'
+			/>
+			<ButtonsContainer >
+				<ButtonLog to='/home' >Registrarse</ButtonLog>
+			</ButtonsContainer>
+		</FormRegistro>
 	)
 }
