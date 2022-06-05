@@ -7,8 +7,8 @@ import 'react-phone-number-input/style.css'
 import imagen from '../../assets/logo-blanco.svg'
 
 export const LoginContent = styled.div`
+	height: 100%;
 	font-family: 'Secular one';
-	background: #0F0F0F;
 	margin: 0;
 	top: auto;
 	width: 100%;
@@ -77,7 +77,7 @@ export const Img = styled.img.attrs({
 	color: white;
 	aspect-ratio: 1/1;
 	width: 100%;
-	max-width: 700px;
+	max-width: 500px;
 	align-self: center;
 
 	@media screen and (max-width: 768px) {
@@ -194,7 +194,7 @@ export const TelefonoTextField = styled(PhoneInput).attrs({
 	placeholder: 'Escribe tu numero',
 	// defaultCountry: 'MX'
 })`
-	width: 70%;
+	width: 330px;
 	line-height: normal;
 	--PhoneInputCountryFlag-height:20px;
 	margin-bottom: 20px;
@@ -206,11 +206,12 @@ export const TelefonoTextField = styled(PhoneInput).attrs({
 		padding: 8px;
 		border-radius: 10px;
 		color: white;
+		margin-right: 0;
 	}
 `
 
 export const ButtonsContainer = styled.nav`
-	width: 70%;
+	width: 330px;
 	display: flex;
 	justify-content: center;
 	align-items: center;

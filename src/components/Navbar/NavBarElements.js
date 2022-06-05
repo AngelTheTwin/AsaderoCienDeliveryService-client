@@ -8,12 +8,11 @@ export const Nav = styled.nav`
 	height: 80px;
 	display: flex;
 	justify-content: space-around;
-	margin-top: -80px;
-	padding: 0 16px;
-	max-width: 100%;
-	position: sticky;
+	/* padding: 0 16px; */
+	width: 100%;
+	position: fixed;
 	top: 0;
-	z-index: 999;
+	z-index: 999999;
 `
 
 export const Title = styled.h4`
@@ -87,6 +86,7 @@ export const NavMenu = styled.div`
 	display: flex;
 	align-items: center;
 	margin-left: auto;
+	margin-right: 16px;
 
 	@media screen and (max-width: 768px){
 		display: none;

@@ -1,10 +1,3 @@
-body {
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  margin: 0;
-  padding: 0;
-}
-
 .swiper {
   max-width: 100%;
   height: 700px;
@@ -25,6 +18,5 @@ body {
   justify-content: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
+  margin-top: 7.5em;
 }

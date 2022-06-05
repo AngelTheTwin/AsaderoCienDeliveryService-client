@@ -2,23 +2,34 @@ import styled from "styled-components"
 
 export const Tarjeta = styled.div`
     width: 60%;
-    height: 60%;
+	height: fit-content;
     background-color: #222222;
     border-radius: 5%;
+
+	@media screen and (max-width: 768px) {
+		width: 80%;
+	}
 `
 
 export const Title = styled.h1`
-    margin: 5%;
+	margin: 0;
+    padding: 5%;
     text-align:center;
     font-family: 'Secular one';
 `
 
 export const Img = styled.img`
     border-radius: 50%;
-    max-width: 15em;
-	max-height: 15em;
+    max-width: 13em;
+	max-height: 13em;
     position: absolute;
-    top: 0%;
+    top: -6.5em;
+
+	@media screen and (max-width: 768px) {
+		max-width: 10em;
+		max-height: 10em;
+		top: -5em;
+	}
 `
 
 export const Comentario = styled.p`
@@ -30,7 +41,7 @@ export const Comentario = styled.p`
     font-family: 'ABeeZee';
 `
 
-export const Nombre = styled.p `
+export const Nombre = styled.p`
     margin-top: 15%;
     margin-left: 5%;
     margin-right: 5%;
