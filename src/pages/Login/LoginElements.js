@@ -87,12 +87,12 @@ export const Img = styled.img.attrs({
 `
 
 export const FormContainer = styled.div`
-height: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-gap: 16px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
 `
 
 export const Form = styled.div`
