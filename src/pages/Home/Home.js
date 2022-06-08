@@ -23,6 +23,20 @@ export const Home = () => {
 		fetchCategorias()
 	}, [])
 
+	function showDetallesPlatillo (idCategoria, idPlatillo) {
+		categorias.forEach(categoria => {
+			if (categoria._id === idCategoria) {
+				categoria.productos.forEach(producto => {
+					if (producto._id === idPlatillo) {
+						alert(`${producto.nombre}\n${producto.descripcion}\nPrecio: $${producto.precio}.00`)
+						return
+					}
+				})
+				return
+			}
+		})
+	}
+
 	return (
 		<HomeContent style={{
 			height: '100%',
@@ -38,7 +52,13 @@ export const Home = () => {
 				<Encabezado>¿De qué tienes antojo?</Encabezado>
 				<CategoriasContainer>
 					{categorias.map(categoria => {
-						return <Categoria key={categoria._id} {...categoria} />
+						return (
+							<Categoria 
+								key={categoria._id} 
+								{...categoria}
+								handleClick={showDetallesPlatillo}
+							/>
+						)
 					})}
 				</CategoriasContainer>
 			</HomeBody>

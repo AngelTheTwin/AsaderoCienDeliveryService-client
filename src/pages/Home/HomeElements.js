@@ -81,6 +81,8 @@ export const PlatillosContainer = styled.div`
 `
 
 export const PlatilloContent = styled.div`
+	display: flex;
+	flex-direction: column;
 	height: 250px;
 	width: 350px;
 	min-height: 250px;
@@ -117,14 +119,17 @@ export const InfoPlatilloContainer = styled.div`
 	line-height: 19px;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	gap: 5px;
-	padding: 12px;
+	padding: 15px;
+	margin-top: auto;
+	margin-bottom: auto;
 
 	@media screen and (max-width: 768px) {
-		font-size: 14px;
-		line-height: 16px;
+		font-size: 13px;
+		line-height: 14px;
 		gap: 3px;
-		padding: 8px;
+		padding: 7px;
 	}
 `
 
@@ -134,4 +139,11 @@ export const NombrePlatillo = styled.p`
 
 export const PrecioPlatillo = styled.p`
 	margin: 0;
+	font-size: 14px;
+	line-height: 17px;
+
+	@media screen and (max-width: 768px) {
+		font-size: 12px;
+		line-height: 13px;
+	}
 `

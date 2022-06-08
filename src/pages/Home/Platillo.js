@@ -9,8 +9,13 @@ import {
 
 export const Platillo = (props) => {
 	return (
-		<PlatilloContent>
-			<ImgPlatillo src={props.imagen} />
+		<PlatilloContent
+			onClick={props.handleClick}
+		>
+			<ImgPlatillo 
+				src={props.imagen} 
+				alt={props.nombre}
+			/>
 			<InfoPlatilloContainer>
 				<NombrePlatillo>{props.nombre}</NombrePlatillo>
 				<PrecioPlatillo>${props.precio}.00</PrecioPlatillo>

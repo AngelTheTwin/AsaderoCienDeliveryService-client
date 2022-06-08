@@ -19,6 +19,6 @@ body {
 	padding-top: 70px;
 }
 
-/* ::-webkit-scrollbar{
-	width: 15px;
-} */
+:root {
+	color-scheme: dark;
+}
