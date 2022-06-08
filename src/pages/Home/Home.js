@@ -6,12 +6,16 @@ import {
 	Encabezado,
 	HomeBody,
 	HomeContent,
-	CategoriasContainer
+	CategoriasContainer,
+	Carrito
 } from './HomeElements'
 import { Categoria } from './Categoria'
+import Modal from '../../components/Modal/Modal'
 
 export const Home = () => {
 	const [categorias, setCategorias] = useState([])
+	const [showModal, setShowModal] = useState(false)
+	const [platilloSeleccionado, setPlatilloSeleccionado] = useState({})
 
 	useEffect(() => {
 		async function fetchCategorias() {
@@ -33,7 +37,8 @@ export const Home = () => {
 			if (categoria._id === idCategoria) {
 				categoria.productos.forEach(producto => {
 					if (producto._id === idPlatillo) {
-						alert(`${producto.nombre}\n${producto.descripcion}\nPrecio: $${producto.precio}.00`)
+						setPlatilloSeleccionado(producto)
+						setShowModal(true)
 						return
 					}
 				})
@@ -48,7 +53,9 @@ export const Home = () => {
 				<Navbar>
 					<FaBars />
 					<Title >Asadero Cien - Restaurante Parrilla</Title>
-					<AiOutlineShoppingCart />
+					<Carrito to='/paymentMethod'>
+						<AiOutlineShoppingCart />
+					</Carrito>
 				</Navbar>
 				<Encabezado>¿De qué tienes antojo?</Encabezado>
 				<CategoriasContainer>
@@ -63,6 +70,29 @@ export const Home = () => {
 					})}
 				</CategoriasContainer>
 			</HomeBody>
+			<Modal 
+				title='Descripcion'
+				estado = {showModal}
+				cambiarEstado = {() => {
+					setShowModal(prevShowModal => {
+						return !prevShowModal
+					})
+				}}
+				children ={
+					<Descripcion {...platilloSeleccionado} />
+				}
+			/>
 		</HomeContent>
 	)
+}
+
+
+const Descripcion = (props) => {
+  return (
+	<div>
+		<h1>{props.nombre}</h1>
+		<p>{props.descripcion}</p>
+		<p>{props.precio}</p>
+	</div>
+  )
 }

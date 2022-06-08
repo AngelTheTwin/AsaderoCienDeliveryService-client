@@ -1,4 +1,12 @@
 import styled from 'styled-components'
+import {AiOutlineClose} from 'react-icons/ai'
+
+export const CloseIcon = styled(AiOutlineClose)`
+	font-size: 20px;
+	&:hover{
+        color: red;
+    }
+`
 
 export const Overlay = styled.div`
     width: 100%;
@@ -15,7 +23,7 @@ export const Overlay = styled.div`
 
 export const ModalContent = styled.div`
     width: 50%;
-    height: 70%;
+    /* height: 70%; */
     position: relative;
     background-color: #ffff;
     border-radius: 10px;
@@ -45,16 +53,15 @@ export const ButtonCerrar = styled.button`
     position: absolute;
     top: 20px;
     right: 16px;
-    width: 3%;
-    height: 4%;
     border: none;
     background: none;
     cursor: pointer;
     transition: .3 ease all;
     border-radius: 5px;
     color: #222222;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-    &:hover{
-        background-color: #F2F2F2;
-    }
+    
 `

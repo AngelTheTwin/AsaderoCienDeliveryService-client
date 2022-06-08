@@ -10,7 +10,6 @@ export const PaymentMethodContent = styled.div`
 	width: 100%;
 	color: white;
 	display: flex;
-	padding-top: 70px;
 `
 
 export const Navbar = styled.nav`

@@ -5,6 +5,7 @@ import{
     ModalContent,
     HeaderModal,
     ButtonCerrar,
+	CloseIcon,
 }from './ModalElements'
 
 const Modal = ({children, estado, cambiarEstado, title}) => {
@@ -17,7 +18,10 @@ const Modal = ({children, estado, cambiarEstado, title}) => {
                             <h3>{title}</h3>
                         </HeaderModal>
 
-                        <ButtonCerrar onClick={() => cambiarEstado(false)}>X</ButtonCerrar>
+                        <ButtonCerrar onClick={() => cambiarEstado(false)}>
+							<CloseIcon />
+						</ButtonCerrar>
+						{children}
                     </ModalContent>
                 </Overlay>
             }

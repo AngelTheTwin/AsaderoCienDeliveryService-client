@@ -1,7 +1,15 @@
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom';
 
 const padding = '28px';
 const paddingMovil = '10px';
+
+export const Carrito = styled(NavLink)`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+`
 
 export const HomeContent = styled.div`
 height: 100%;
