@@ -11,11 +11,15 @@ import {
 } from './HomeElements'
 import { Categoria } from './Categoria'
 import Modal from '../../components/Modal/Modal'
+import { Descripcion } from './Descripcion/Descripcion'
 
 export const Home = () => {
 	const [categorias, setCategorias] = useState([])
 	const [showModal, setShowModal] = useState(false)
 	const [platilloSeleccionado, setPlatilloSeleccionado] = useState({})
+	const [carrito, setCarrito] = useState([])
+
+	console.log(carrito)
 
 	useEffect(() => {
 		async function fetchCategorias() {
@@ -55,7 +59,9 @@ export const Home = () => {
 					<Title >Asadero Cien - Restaurante Parrilla</Title>
 					<Carrito to='/paymentMethod'>
 						<AiOutlineShoppingCart />
+						<span> {carrito.length}</span>
 					</Carrito>
+					
 				</Navbar>
 				<Encabezado>¿De qué tienes antojo?</Encabezado>
 				<CategoriasContainer>
@@ -71,7 +77,7 @@ export const Home = () => {
 				</CategoriasContainer>
 			</HomeBody>
 			<Modal 
-				title='Descripcion'
+				title='Descripción'
 				estado = {showModal}
 				cambiarEstado = {() => {
 					setShowModal(prevShowModal => {
@@ -79,20 +85,22 @@ export const Home = () => {
 					})
 				}}
 				children ={
-					<Descripcion {...platilloSeleccionado} />
+					<Descripcion 
+						platillo={platilloSeleccionado} 
+						agregarACarrito={() => {
+							setCarrito(prevCarrito => {
+								return [
+									...prevCarrito,
+									platilloSeleccionado,
+								]
+							})
+							setShowModal(prevShowModal => {
+								return !prevShowModal
+							})
+						}}
+					/>
 				}
 			/>
 		</HomeContent>
 	)
-}
-
-
-const Descripcion = (props) => {
-  return (
-	<div>
-		<h1>{props.nombre}</h1>
-		<p>{props.descripcion}</p>
-		<p>{props.precio}</p>
-	</div>
-  )
 }

@@ -10,13 +10,16 @@ import {
 export const Platillo = (props) => {
 	return (
 		<PlatilloContent
+		color={props.color}
 			onClick={props.handleClick}
 		>
 			<ImgPlatillo 
 				src={props.imagen} 
 				alt={props.nombre}
 			/>
-			<InfoPlatilloContainer>
+			<InfoPlatilloContainer
+				color={props.color}
+			>
 				<NombrePlatillo>{props.nombre}</NombrePlatillo>
 				<PrecioPlatillo>${props.precio}.00</PrecioPlatillo>
 			</InfoPlatilloContainer>

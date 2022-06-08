@@ -1,32 +1,34 @@
 import React from "react"
 
-import{
-    Overlay,
-    ModalContent,
-    HeaderModal,
-    ButtonCerrar,
+import {
+	Overlay,
+	ModalContent,
+	HeaderModal,
+	ButtonCerrar,
 	CloseIcon,
-}from './ModalElements'
+	BodyModal,
+} from './ModalElements'
 
-const Modal = ({children, estado, cambiarEstado, title}) => {
-    return(
-        <>
-            {estado &&
-                <Overlay>
-                    <ModalContent>
-                        <HeaderModal>
-                            <h3>{title}</h3>
-                        </HeaderModal>
-
-                        <ButtonCerrar onClick={() => cambiarEstado(false)}>
-							<CloseIcon />
-						</ButtonCerrar>
-						{children}
-                    </ModalContent>
-                </Overlay>
-            }
-        </> 
-    )
+const Modal = ({ children, estado, cambiarEstado, title }) => {
+	return (
+		<>
+			{estado &&
+				<Overlay>
+					<ModalContent>
+						<HeaderModal>
+							<h3>{title}</h3>
+							<ButtonCerrar onClick={() => cambiarEstado(false)}>
+								<CloseIcon />
+							</ButtonCerrar>
+						</HeaderModal>
+						<BodyModal>
+							{children}
+						</BodyModal>
+					</ModalContent>
+				</Overlay>
+			}
+		</>
+	)
 }
 
 export default Modal

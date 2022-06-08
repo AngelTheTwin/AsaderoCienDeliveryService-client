@@ -50,6 +50,10 @@ export const BackIcon = styled(BiArrowBack)`
 
 export const Title = styled.h4`
 	/* margin: 0; */
+	font-size: 16px;
+	@media screen and (max-width: 768px) {
+		font-size: 14px;
+	}
 `
 
 export const Grid = styled.div`
