@@ -4,7 +4,7 @@ import {AiOutlineClose} from 'react-icons/ai'
 export const CloseIcon = styled(AiOutlineClose)`
 	font-size: 20px;
 	&:hover{
-        color: red;
+        color: #C40C0C;
     }
 `
 
@@ -15,6 +15,8 @@ export const Overlay = styled.div`
     top: 0;
     left: 0;
     background-color: rgba(0,0,0,.5);
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
     padding-top: 16px;
     display: flex;
     align-items: center;
@@ -23,9 +25,9 @@ export const Overlay = styled.div`
 
 export const ModalContent = styled.div`
     width: 50%;
-    /* height: 70%; */
     position: relative;
-    background-color: #ffff;
+    background-color: #222222;
+	color: white;
     border-radius: 10px;
     box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
     padding: 20px;
@@ -44,8 +46,7 @@ export const HeaderModal = styled.div`
 
     h3{
         font-weight: 500;
-        font-size: 16px;
-        color: #222222;
+        font-size: 20px;
         margin: 0;
     }
 `
@@ -58,7 +59,7 @@ export const ButtonCerrar = styled.button`
     cursor: pointer;
     transition: .3 ease all;
     border-radius: 5px;
-    color: #222222;
+    color: white;
 	display: flex;
 	align-items: center;
 	justify-content: center;
