@@ -29,6 +29,7 @@ export const Navbar = styled.nav`
 	justify-content: space-evenly;
 	align-items: center;
 	height: 70px;
+	left: 0 !important;
 	z-index: 999;
 `
 
@@ -244,16 +245,16 @@ export const FormLogin = styled.div`
 	justify-content: center;
 	gap: 16px;
 	transition: 1s ease-in-out;
-	opacity: ${({ etapaLogin }) => (etapaLogin == 'login' ? '100%' : '0%')};
-	position: ${({ etapaLogin }) => (etapaLogin == 'login' ? 'relative' : 'absolute')};
-	right: ${({ etapaLogin }) => (etapaLogin == 'login' ? '0' : '-100%')};
+	opacity: ${({ etapaLogin }) => (etapaLogin === 'login' ? '100%' : '0%')};
+	position: ${({ etapaLogin }) => (etapaLogin === 'login' ? 'relative' : 'absolute')};
+	right: ${({ etapaLogin }) => (etapaLogin === 'login' ? '0' : '-100%')};
 `
 
 export const FormRegistro = styled(Form)`
 	transition: 1s ease-in-out;
-	opacity: ${({ etapaLogin }) => (etapaLogin == 'registro' ? '100%' : '0%')};
-	position: ${({ etapaLogin }) => (etapaLogin == 'registro' ? 'relative' : 'fixed')};
-	left: ${({ etapaLogin }) => (etapaLogin == 'registro' ? '0' : '-100%')};
+	opacity: ${({ etapaLogin }) => (etapaLogin === 'registro' ? '100%' : '0%')};
+	position: ${({ etapaLogin }) => (etapaLogin === 'registro' ? 'relative' : 'fixed')};
+	left: ${({ etapaLogin }) => (etapaLogin === 'registro' ? '0' : '-100%')};
 `
 
 export const ButtonLog = styled(NavLink)`
