@@ -17,6 +17,7 @@ export const Categoria = (props) => {
 						<Platillo 
 							key={platillo._id} 
 							{...platillo} 
+							color='#222222'
 							handleClick= {() => {
 								props.handleClick(props._id, platillo._id)
 							}}

@@ -9,6 +9,8 @@ export const Carrito = styled(NavLink)`
 	justify-content: center;
 	align-items: center;
 	color: white;
+	text-decoration: none;
+	gap: 4px;
 `
 
 export const HomeContent = styled.div`
@@ -112,7 +114,7 @@ export const PlatilloContent = styled.div`
 	min-height: 250px;
 	min-width: 350px;
 	border-radius: 15px;
-	background-color: #222222;
+	background-color: ${({ color }) => (color)};
 	overflow: hidden;
 
 	@media screen and (max-width: 768px) {
@@ -148,6 +150,7 @@ export const InfoPlatilloContainer = styled.div`
 	padding: 15px;
 	margin-top: auto;
 	margin-bottom: auto;
+	color: white;
 
 	@media screen and (max-width: 768px) {
 		font-size: 13px;
