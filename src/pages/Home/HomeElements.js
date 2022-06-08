@@ -1,14 +1,19 @@
 import styled from 'styled-components'
 
+const padding = '28px';
+const paddingMovil = '10px';
+
 export const HomeContent = styled.div`
+height: 100%;
 	display: flex;
+	flex-direction: column;
 `
 
 export const HomeBody = styled.div`
-	padding: 28px;
+	padding: ${padding};
 
 	@media screen and (max-width: 768px) {
-		padding: 10px;
+		padding: ${paddingMovil};
 	}
 `
 
@@ -73,10 +78,21 @@ export const PlatillosContainer = styled.div`
 	gap: 24px;
 	overflow-x: scroll;
 	padding-bottom: 10px;
+	margin-left: -${padding};
+	padding-left: ${padding};
+	margin-right: -${padding};
+	padding-right: ${padding};
 
 	&::-webkit-scrollbar{
 		height: 0;
 		opacity: 0;
+	}
+
+	@media screen and (max-width: 768px) {
+		padding-left: ${paddingMovil};
+		margin-left: -${paddingMovil};
+		padding-right: ${paddingMovil};
+		margin-right: -${paddingMovil};
 	}
 `
 
@@ -115,8 +131,8 @@ export const InfoPlatilloContainer = styled.div`
 	font-family: 'ABeeZee';
 	font-style: normal;
 	font-weight: 400;
-	font-size: 16px;
-	line-height: 19px;
+	font-size: 2vw;
+	line-height: 17px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -134,7 +150,14 @@ export const InfoPlatilloContainer = styled.div`
 `
 
 export const NombrePlatillo = styled.p`
+	font-size: 1.8vw;
+	white-space: nowrap;
 	margin: 0;
+
+	@media screen and (max-width: 768px) {
+		font-size: 3.4vw;
+		line-height: 14px;
+	}
 `
 
 export const PrecioPlatillo = styled.p`

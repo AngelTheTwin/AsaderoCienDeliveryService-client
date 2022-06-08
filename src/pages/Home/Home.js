@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Navbar, Title } from '../Login/LoginElements'
 import { FaBars } from 'react-icons/fa'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
-import { Encabezado,
-	HomeBody, 
-	HomeContent, 
+import {
+	Encabezado,
+	HomeBody,
+	HomeContent,
 	CategoriasContainer
 } from './HomeElements'
 import { Categoria } from './Categoria'
@@ -14,16 +15,20 @@ export const Home = () => {
 
 	useEffect(() => {
 		async function fetchCategorias() {
-			let response = await fetch('http://angel.local:8080/categoria/getAllConProductos')
-			if (!response) return
-			if (!response.ok) return
-			let listaCategorias = await response.json()
-			setCategorias(listaCategorias)
+			try {
+				let response = await fetch('http://angel.local:8080/categoria/getAllConProductos')
+				if (!response) return
+				if (!response.ok) return
+				let listaCategorias = await response.json()
+				setCategorias(listaCategorias)
+			} catch (error) {
+				console.log(error)
+			}
 		}
 		fetchCategorias()
 	}, [])
 
-	function showDetallesPlatillo (idCategoria, idPlatillo) {
+	function showDetallesPlatillo(idCategoria, idPlatillo) {
 		categorias.forEach(categoria => {
 			if (categoria._id === idCategoria) {
 				categoria.productos.forEach(producto => {
@@ -38,11 +43,7 @@ export const Home = () => {
 	}
 
 	return (
-		<HomeContent style={{
-			height: '100%',
-			display: 'flex',
-			flexDirection: 'column',
-		}}>
+		<HomeContent >
 			<HomeBody>
 				<Navbar>
 					<FaBars />
@@ -53,8 +54,8 @@ export const Home = () => {
 				<CategoriasContainer>
 					{categorias.map(categoria => {
 						return (
-							<Categoria 
-								key={categoria._id} 
+							<Categoria
+								key={categoria._id}
 								{...categoria}
 								handleClick={showDetallesPlatillo}
 							/>
