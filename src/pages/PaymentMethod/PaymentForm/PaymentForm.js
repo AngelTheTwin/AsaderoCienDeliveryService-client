@@ -1,93 +1,134 @@
-import React, {useState} from 'react'
+import React, { usetarjeta } from 'react'
 import Cards from 'react-credit-cards'
 import 'react-credit-cards/es/styles-compiled.css'
 import {
-    TextField,
-    PaymentFormContent,
-    FormCard,
-    FormCardRow,
-    ButtonEliminarTarjeta,
-    ButtonGuardarTarjeta
-}from './PaymentFormElements'
+	TextField,
+	PaymentFormContent,
+	FormCard,
+	FormCardRow,
+	ButtonEliminarTarjeta,
+	ButtonGuardarTarjeta
+} from './PaymentFormElements'
 
-const PaymentForm = () => {
+const PaymentForm = ({ tarjeta, setTarjeta, cerrarModal, eliminarTarjeta, tarjetaDefault }) => {
+	if (!tarjeta) {
+		tarjeta = {
+			_id: '',
+			number: "",
+			name: "",
+			expiry: "",
+			cvc: "",
+			focus: ""
+		}
+	}
 
-    const [state, setState] = useState({
-        number: "",
-        name: "",
-        expiry: "",
-        cvc: "",
-        focus: ""
-    })
-
-    const hadleInputChange = (event) =>{
-        setState({
-            ...state,
-            [event.target.id] : event.target.value
-        })
-    }
-
-
-    const hadleFocusChange = (event) =>{
-        setState({
-            ...state,
-            focus : event.target.id
-        })
-    }
+	const hadleInputChange = (event) => {
+		setTarjeta({
+			...tarjeta,
+			[event.target.id]: event.target.value
+		})
+	}
 
 
-    return(
-        <PaymentFormContent>
-            <Cards
-                number={state.number}
-                name={state.name}
-                expiry={state.expiry}
-                cvc={state.cvc}
-                focused={state.focus}
-            />
-            
-            <FormCard>
-                <TextField
-                    placeholder='Número de tarjeta'
-                    id="number"
-                    maxLength={"16"}
-                    onChange={hadleInputChange}
-                    onFocus={hadleFocusChange}
-                />
+	const hadleFocusChange = (event) => {
+		setTarjeta({
+			...tarjeta,
+			focus: event.target.id
+		})
+	}
 
-                <TextField
-                    placeholder='Nombre del titular'
-                    id="name"
-                    maxLength={"30"}
-                    onChange={hadleInputChange}
-                    onFocus={hadleFocusChange}
-                />
+	return (
+		<PaymentFormContent>
+			<Cards
+				number={tarjeta.number}
+				name={tarjeta.name}
+				expiry={tarjeta.expiry}
+				cvc={tarjeta.cvc}
+				focused={tarjeta.focus}
+			/>
 
-                <FormCardRow>
-                    <TextField
-                        placeholder='Fecha de expiración'
-                        id="expiry"
-                        maxLength={"4"}
-                        onChange={hadleInputChange}
-                        onFocus={hadleFocusChange}
-                    />
+			<FormCard>
+				<TextField
+					placeholder='Número de tarjeta'
+					id="number"
+					maxLength={"16"}
+					value={tarjeta.number}
+					onChange={(event) => {
+						setTarjeta({
+							...tarjeta,
+							number: event.target.value
+						})
+					}}
+					onFocus={hadleFocusChange}
+				/>
 
-                    <TextField
-                        placeholder='CVV'
-                        id="cvc"
-                        maxLength={"4"}
-                        onChange={hadleInputChange}
-                        onFocus={hadleFocusChange}
-                    />
-                </FormCardRow>
+				<TextField
+					placeholder='Nombre del titular'
+					id="name"
+					maxLength={"30"}
+					value={tarjeta.name}
+					onChange={hadleInputChange}
+					onFocus={hadleFocusChange}
+				/>
 
-                <ButtonEliminarTarjeta>Eliminar tarjeta</ButtonEliminarTarjeta>
+				<FormCardRow>
+					<TextField
+						placeholder='Fecha de expiración'
+						id="expiry"
+						maxLength={"4"}
+						value={tarjeta.expiry}
+						onChange={hadleInputChange}
+						onFocus={hadleFocusChange}
+					/>
 
-                <ButtonGuardarTarjeta>Guardar Tarjeta</ButtonGuardarTarjeta>
-            </FormCard>
+					<TextField
+						placeholder='CVV'
+						id="cvc"
+						maxLength={"4"}
+						value={tarjeta.cvc}
+						onChange={hadleInputChange}
+						onFocus={hadleFocusChange}
+					/>
+				</FormCardRow>
 
-        </PaymentFormContent>
-    )     
+				{
+					(tarjeta._id !== '') &&
+					<ButtonEliminarTarjeta
+						onClick={() => {
+							eliminarTarjeta(tarjeta)
+							cerrarModal()
+						}}
+					>Eliminar tarjeta</ButtonEliminarTarjeta>
+				}
+
+				<ButtonGuardarTarjeta
+					onClick={() => {
+						// LLamada a API para guardar la tarjeta
+						let llamadaAPI = false
+
+						// Si la Tarjeta se gardó con exito
+						if (llamadaAPI) {
+							setTarjeta({
+								...tarjeta,
+								focus: '',
+							})
+						} else {
+							if (!tarjetaDefault) {
+								eliminarTarjeta(tarjeta)
+							} else {
+								setTarjeta({
+									...tarjetaDefault,
+									focus: '',
+								})
+							}
+							cerrarModal()
+						}
+					}}
+				>Guardar Tarjeta</ButtonGuardarTarjeta>
+			</FormCard>
+
+		</PaymentFormContent>
+	)
 }
 
 export default PaymentForm

@@ -2,38 +2,49 @@ import React, { useState } from 'react'
 import Modal from '../../../components/Modal/Modal'
 import PaymentForm from '../PaymentForm/PaymentForm'
 import Cards from 'react-credit-cards'
+import { DivTarjeta } from '../PaymentMethodElements'
 
 
-export const Card = () => {
+export const Card = ({ tarjeta, setTarjeta, tarjetaDefault }) => {
 
-    const [estadoModal, cambiarEstadoModal] = useState(false)
-
-    const [state, setState] = useState({
-        number: "",
-        name: "",
-        expiry: "",
-        cvc: "",
-        focus: ""
-    })
+	const [estadoModal, cambiarEstadoModal] = useState(false)
 
 	return (
-        <>
-            <Cards
-                number={state.number}
-                name={state.name}
-                expiry={state.expiry}
-                cvc={state.cvc}
-                focused={state.focus}
-            />
+		<>
+			<DivTarjeta
+				onClick={() => {
+					cambiarEstadoModal(true)
+				}}
+			>
+				<Cards
+					number={tarjeta.number}
+					name={tarjeta.name}
+					expiry={tarjeta.expiry}
+					cvc={tarjeta.cvc}
+					focused={tarjeta.focus}
+				/>
+			</DivTarjeta>
 
-            <Modal 
-                estado={estadoModal} 
-                cambiarEstado={cambiarEstadoModal}
-                title="Modificar tarjeta">
+			<Modal
+				estado={estadoModal}
+				cambiarEstado={(showModal) => {
+					setTarjeta({
+						...tarjetaDefault
+					})
+					cambiarEstadoModal(showModal)
+				}}
+				title="Modificar tarjeta">
 
-                <PaymentForm/>
-            </Modal>
-        </>
+				<PaymentForm
+					tarjeta={tarjeta}
+					setTarjeta={setTarjeta}
+					tarjetaDefault={tarjetaDefault}
+					cerrarModal={() => {
+						cambiarEstadoModal(false)
+					}}
+				/>
+			</Modal>
+		</>
 
-    )
+	)
 }
