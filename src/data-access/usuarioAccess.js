@@ -1,7 +1,7 @@
 export const login = (usuario) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			const url = 'http://angel.local:8080/usuario/login'
+			const url = 'http://localhost:8080/usuario/login'
 			let response = await fetch(url, {
 				method: 'POST',
 				headers: {
@@ -29,7 +29,7 @@ export const login = (usuario) => {
 export const createUsuario = (usuario) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			const url = 'http://angel.local:8080/usuario/create'
+			const url = 'http://localhost:8080/usuario/create'
 			const response = await fetch(url, {
 				method: 'POST',
 				headers: {
