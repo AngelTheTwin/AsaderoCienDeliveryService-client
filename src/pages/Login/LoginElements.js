@@ -260,26 +260,3 @@ export const FormRegistro = styled(Form)`
 	position: ${({ etapaLogin }) => (etapaLogin === 'registro' ? 'relative' : 'fixed')};
 	left: ${({ etapaLogin }) => (etapaLogin === 'registro' ? '0' : '-100%')};
 `
-
-export const ButtonLog = styled(NavLink)`
-	font-family: 'ABeeZee';
-	font-size: small;
-	background-color: #C40B0B;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: white;
-	border-radius: 10px;
-	border: none;
-	padding: 10px;
-	width: 100%;
-	cursor: pointer;
-	transition: 0.2s ease-in-out;
-	text-decoration: none;
-
-	&:hover{
-		color: black;
-		background-color: white;
-		transition: 0.2s ease-in-out;
-	}
-`

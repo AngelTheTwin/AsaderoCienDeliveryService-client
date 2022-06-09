@@ -1,4 +1,8 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import { createUsuario, login } from '../../data-access/usuarioAccess';
 import {
 	BackButton,
 	BackIcon,
@@ -26,8 +30,15 @@ import {
 	Title,
 } from './LoginElements'
 import { LoginWithButton } from './LoginWithButton'
-
-
+const toastProperties = {
+	position: "bottom-center",
+	autoClose: 5000,
+	hideProgressBar: false,
+	closeOnClick: true,
+	pauseOnHover: true,
+	draggable: true,
+	progress: undefined,
+}
 
 export const Login = () => {
 	const [etapaLogin, setEtapaLogin] = useState('login')
@@ -67,6 +78,7 @@ export const Login = () => {
 						<FormularioRegistro
 							etapaLogin={etapaLogin}
 							setEtapaLogin={setEtapaLogin}
+							setShowLogin={setShowLogin}
 						/>
 					</Form>
 
@@ -77,6 +89,29 @@ export const Login = () => {
 }
 
 export function FormularioLogin(props) {
+	const navigate = useNavigate()
+	const [correo, setCorreo] = useState('')
+	const [contraseña, setContraseña] = useState('')
+
+	const buttonLoginClicked = async () => {
+		const toastLogin = toast.loading('Iniciando Sesión', toastProperties)
+		try {
+			const usuario = await login({
+				correo,
+				contraseña
+			})
+			sessionStorage.setItem('usuario', JSON.stringify(usuario))
+			navigate("../home")
+		} catch (error) {
+			toast.update(toastLogin, {
+				render: error.mensaje,
+				type: 'error',
+				isLoading: false,
+				...toastProperties
+			})
+		}
+	}
+
 	return (
 		<FormLogin
 			etapaLogin={props.etapaLogin}
@@ -84,13 +119,23 @@ export function FormularioLogin(props) {
 			<TextField
 				placeholder='Correo'
 				type='email'
+				value={correo}
+				onChange={(event) => {
+					setCorreo(event.target.value)
+				}}
 			/>
 			<TextField
 				placeholder='Contraseña'
 				type='password'
+				value={contraseña}
+				onChange={(event) => {
+					setContraseña(event.target.value)
+				}}
 			/>
 			<ButtonsContainer >
-				<ButtonLog to='/home'>Iniciar Sesión</ButtonLog>
+				<Button
+					onClick={buttonLoginClicked}
+				>Iniciar Sesión</Button>
 			</ButtonsContainer>
 			<Registro >
 				<span>¿Aún no te has registrado? </span>
@@ -103,24 +148,83 @@ export function FormularioLogin(props) {
 					}}
 				>Registrate aquí</Enlace>
 			</Registro>
+			<ToastContainer
+				theme='dark'
+			/>
 		</FormLogin>
 	)
 }
 
 function FormularioRegistro(props) {
+	const [formData, setFormData] = useState({
+		nombre: '',
+		apellido: '',
+		correo: '',
+		contraseña: '',
+	})
 	const [telefono, setTelefono] = useState('')
+
+	const handleChange = (event) => {
+		const name = event.target.name
+		const value = event.target.value
+		setFormData(prevFormData => {
+			return {
+				...prevFormData,
+				[name]: value
+			}
+		})
+	}
+
+	const buttonRegistrarseClicked = async () => {
+		const toastRegistro = toast.loading('Registrándote...', toastProperties)
+		try {
+			const mensaje = await createUsuario({
+				...formData,
+				telefono
+			})
+			toast.update(toastRegistro, {
+				render: mensaje.mensaje,
+				type: 'success',
+				isLoading: false,
+				...toastProperties
+			})
+			toast.info('¡Ya puedes iniciar sesión!')
+			props.setShowLogin(true)
+			setTimeout(() => {
+				props.setEtapaLogin('login')
+			}, 250)
+			
+		} catch (error) {
+			toast.update(toastRegistro, {
+				render: error.mensaje,
+				type: 'error',
+				isLoading: false,
+				...toastProperties
+			})
+		}
+	}
+
 	return (
 		<FormRegistro
 			etapaLogin={props.etapaLogin}
 		>
 			<TextField
+				name='nombre'
 				placeholder='Nombre'
+				value={formData.nombre}
+				onChange={handleChange}
 			/>
 			<TextField
+				name='apellido'
 				placeholder='Apellido'
+				value={formData.apellido}
+				onChange={handleChange}
 			/>
 			<TextField
+				name='correo'
 				placeholder='Correo Electronico'
+				value={formData.correo}
+				onChange={handleChange}
 				type='email'
 			/>
 			<TelefonoTextField
@@ -130,12 +234,28 @@ function FormularioRegistro(props) {
 				onChange={setTelefono}
 			/>
 			<TextField
+				name='contraseña'
 				placeholder='Contraseña'
+				value={formData.contraseña}
+				onChange={handleChange}
 				type='password'
 			/>
 			<ButtonsContainer >
-				<ButtonLog to='/home' >Registrarse</ButtonLog>
+				<Button
+					onClick={() => {
+						props.setShowLogin(true)
+						setTimeout(() => {
+							props.setEtapaLogin('login')
+						}, 250)
+					}}
+				>Regresar</Button>
+				<Button
+					onClick={buttonRegistrarseClicked}
+				>Registrarse</Button>
 			</ButtonsContainer>
+			<ToastContainer
+				theme='dark'
+			/>
 		</FormRegistro>
 	)
 }
