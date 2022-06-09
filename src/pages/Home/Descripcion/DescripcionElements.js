@@ -62,7 +62,7 @@ export const TextArea = styled.textarea.attrs({
 
 	@media screen and (max-width: 768px) {
 		height: 80px;
-		width: 200px;
+		max-width: 80%;
 		font-size: 12px;
 	}
 `
