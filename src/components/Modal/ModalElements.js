@@ -42,7 +42,7 @@ export const ModalContent = styled.div`
 `
 
 export const HeaderModal = styled.div`
-padding-top: 20px;
+    padding-top: 20px;
 	position: fixed;
     display: flex;
 	height: auto;
@@ -52,6 +52,7 @@ padding-top: 20px;
     border-bottom: 1px solid #E8E8E8;
 	background-color: #222222;
 	width: 50%;
+    z-index: 999;
 	@media screen and (max-width: 768px) {
         width: 80%;
 	}

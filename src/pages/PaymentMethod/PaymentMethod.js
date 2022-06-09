@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Modal from '../../components/Modal/Modal'
+import { Card } from './Card/Card'
+import PaymentForm from './PaymentForm/PaymentForm'
 
 import {
 	PaymentMethodContent,
@@ -13,8 +15,6 @@ import {
 	Text,
 	DivTarjeta,
 }from './PaymentMethodElements'
-
-import { Card } from './Card/Card'
 
 export const PaymentMethod = () => {
 
@@ -30,20 +30,32 @@ export const PaymentMethod = () => {
 			</Navbar>
 
 			<Grid >
-				<DivTarjeta>
-					<ButtonAgregar onClick={() => cambiarEstadoModal(!estadoModal)}>
+				<DivTarjeta onClick={() => cambiarEstadoModal(!estadoModal)}>
+					<ButtonAgregar >
 						<Plus>+</Plus>
 						<Text>Agregar nueva tarjeta</Text>
 					</ButtonAgregar>
 				</DivTarjeta>
 
 
-				<DivTarjeta>
-					<Card></Card>
+				<DivTarjeta onClick={() => cambiarEstadoModal(!estadoModal)}>
+					<Card ></Card>
 				</DivTarjeta>
 
-				<DivTarjeta>
-					<Card></Card>
+				<DivTarjeta onClick={() => cambiarEstadoModal(!estadoModal)}>
+					<Card ></Card>
+				</DivTarjeta>
+
+				<DivTarjeta onClick={() => cambiarEstadoModal(!estadoModal)}>
+					<Card ></Card>
+				</DivTarjeta>
+
+				<DivTarjeta onClick={() => cambiarEstadoModal(!estadoModal)}>
+					<Card ></Card>
+				</DivTarjeta>
+
+				<DivTarjeta	vTarjeta onClick={() => cambiarEstadoModal(!estadoModal)}>
+					<Card ></Card>
 				</DivTarjeta>
 			</Grid>
 
@@ -52,6 +64,7 @@ export const PaymentMethod = () => {
 				cambiarEstado={cambiarEstadoModal}
 				title="Agregar nueva tarjeta">
 
+				<PaymentForm/>
 			</Modal>
 		</PaymentMethodContent>
 	)

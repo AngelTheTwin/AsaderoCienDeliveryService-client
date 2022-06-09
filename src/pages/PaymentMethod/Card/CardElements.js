@@ -9,6 +9,8 @@ export const CardContent = styled.div`
     border-radius: 20px;
     width: 90%;
     aspect-ratio: 16/9;
+    align-self: center;
+    cursor: pointer;
 
     @media screen and (max-width: 768px) {
         width: 100%;
