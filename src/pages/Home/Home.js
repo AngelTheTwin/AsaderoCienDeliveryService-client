@@ -12,6 +12,7 @@ import {
 import { Categoria } from './Categoria'
 import Modal from '../../components/Modal/Modal'
 import { Descripcion } from './Descripcion/Descripcion'
+import { Sidebar } from '../../components/Sidebar/SidebarElements'
 
 export const Home = () => {
 	const [categorias, setCategorias] = useState([])
@@ -22,7 +23,7 @@ export const Home = () => {
 	useEffect(() => {
 		async function fetchCategorias() {
 			try {
-				let response = await fetch('http://angel.local:8080/categoria/getAllConProductos')
+				let response = await fetch('http://localhost:8080/categoria/getAllConProductos')
 				if (!response) return
 				if (!response.ok) return
 				let listaCategorias = await response.json()
@@ -97,6 +98,8 @@ export const Home = () => {
 					/>
 				}
 			/>
+
+			<Sidebar/>
 		</HomeContent>
 	)
 }
