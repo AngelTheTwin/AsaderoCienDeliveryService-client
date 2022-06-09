@@ -19,8 +19,6 @@ export const Home = () => {
 	const [platilloSeleccionado, setPlatilloSeleccionado] = useState({})
 	const [carrito, setCarrito] = useState([])
 
-	console.log(carrito)
-
 	useEffect(() => {
 		async function fetchCategorias() {
 			try {
@@ -94,9 +92,7 @@ export const Home = () => {
 									platilloSeleccionado,
 								]
 							})
-							setShowModal(prevShowModal => {
-								return !prevShowModal
-							})
+							setShowModal(false)
 						}}
 					/>
 				}
