@@ -261,7 +261,7 @@ export const FormRegistro = styled(Form)`
 	left: ${({ etapaLogin }) => (etapaLogin === 'registro' ? '0' : '-100%')};
 `
 
-export const ButtonLog = styled(NavLink)`
+export const ButtonLog = styled.button`
 	font-family: 'ABeeZee';
 	font-size: small;
 	background-color: #C40B0B;
