@@ -1,9 +1,9 @@
 const HOST = process.env.REACT_APP_HOST
-const usuario = JSON.parse(sessionStorage.getItem('usuario'))
 
 export const getAllMetodosPago = () => {
 	return new Promise(async (resolve, reject) => {
 		try {
+			const usuario = JSON.parse(sessionStorage.getItem('usuario'))
 			const url = `http://${HOST}:8080/metodoPago/getAllByUsuario`
 			const response = await fetch(url, {
 				headers: {
@@ -35,6 +35,7 @@ export const getAllMetodosPago = () => {
 export const createMetodoPago = (metodoPago) => {
 	return new Promise(async (resolve, reject) => {
 		try {
+			const usuario = JSON.parse(sessionStorage.getItem('usuario'))
 			const url = `http://${HOST}:8080/metodoPago/create`
 			const response  = await fetch(url, {
 				method: 'POST',
@@ -69,6 +70,7 @@ export const createMetodoPago = (metodoPago) => {
 export const updateMetodoPago = (metodoPago) => {
 	return new Promise(async (resolve, reject) => {
 		try {
+			const usuario = JSON.parse(sessionStorage.getItem('usuario'))
 			const url = `http://${HOST}:8080/metodoPago/update`
 			const response  = await fetch(url, {
 				method: 'PUT',
@@ -103,6 +105,7 @@ export const updateMetodoPago = (metodoPago) => {
 export const deleteMetodoPago = (metodoPago) => {
 	return new Promise(async (resolve, reject) => {
 		try {
+			const usuario = JSON.parse(sessionStorage.getItem('usuario'))
 			const url = `http://${HOST}:8080/metodoPago/delete`
 			const response  = await fetch(url, {
 				method: 'DELETE',

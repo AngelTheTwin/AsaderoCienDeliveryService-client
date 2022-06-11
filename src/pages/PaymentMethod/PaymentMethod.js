@@ -3,20 +3,20 @@ import Modal from '../../components/Modal/Modal'
 import { Card } from './Card/Card'
 import PaymentForm from './PaymentForm/PaymentForm'
 import { nanoid } from 'nanoid'
-import { 
-	createMetodoPago, 
-	deleteMetodoPago, 
-	getAllMetodosPago, 
-	updateMetodoPago 
+import {
+	createMetodoPago,
+	deleteMetodoPago,
+	getAllMetodosPago,
+	updateMetodoPago
 } from '../../data-access/metodosPagoAccess'
-import { 
-	ToastContainer, 
-	toast 
+import {
+	ToastContainer,
+	toast
 } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { 
-	useMutation, 
-	useQuery 
+import {
+	useMutation,
+	useQuery
 } from 'react-query'
 import {
 	PaymentMethodContent,
@@ -30,6 +30,7 @@ import {
 	Text,
 	DivTarjeta,
 } from './PaymentMethodElements'
+import { SpinnerCircular } from 'spinners-react'
 
 export const PaymentMethod = () => {
 	let toastMetodoPago
@@ -52,7 +53,7 @@ export const PaymentMethod = () => {
 		cvv: '',
 	})
 
-	const { data: tarjetasIniciales, refetch } = useQuery(["getAllMetodosPago"], getAllMetodosPago, {
+	const { data: tarjetasIniciales, refetch, isLoading } = useQuery(["getAllMetodosPago"], getAllMetodosPago, {
 		onSuccess: (tarjetas) => {
 			setListaTarjetas(tarjetas)
 		},
@@ -87,7 +88,7 @@ export const PaymentMethod = () => {
 		}
 	})
 
-	const eliminarTarjeta = useMutation(({tarjeta}) => {
+	const eliminarTarjeta = useMutation(({ tarjeta }) => {
 		toastMetodoPago = toast.loading('Eliminando...', toastProperties)
 		return deleteMetodoPago(tarjeta)
 	}, {
@@ -161,7 +162,7 @@ export const PaymentMethod = () => {
 	}
 
 	const indiceTarjetaSeleccionada = () => {
-		for (var i=0; i<listaTarjetas.length; i++) {
+		for (var i = 0; i < listaTarjetas.length; i++) {
 			if (tarjetaSeleccionada._id === listaTarjetas[i]._id) {
 				return i
 			}
@@ -177,26 +178,29 @@ export const PaymentMethod = () => {
 				<Title >Asadero Cien - Restaurante Parrilla</Title>
 			</Navbar>
 
-			<Grid >
-				<DivTarjeta onClick={agregarNuevaTarjetaButtonClicked}>
-					<ButtonAgregar >
-						<Plus>+</Plus>
-						<Text>Agregar nueva tarjeta</Text>
-					</ButtonAgregar>
-				</DivTarjeta>
-				{
-					listaTarjetas.map(tarjeta => {
-						return (
-							<Card
-								key={tarjeta._id}
-								tarjeta={tarjeta}
-								setTarjetaSeleccionada={setTarjetaSeleccionada}
-								cambiarEstadoModal={cambiarEstadoModal} >
-							</Card>
-						)
-					})
-				}
-			</Grid>
+			{isLoading
+				? <SpinnerCircular color='red' enabled={isLoading}/>
+				: <Grid >
+					<DivTarjeta onClick={agregarNuevaTarjetaButtonClicked}>
+						<ButtonAgregar >
+							<Plus>+</Plus>
+							<Text>Agregar nueva tarjeta</Text>
+						</ButtonAgregar>
+					</DivTarjeta>
+					{
+						listaTarjetas.map(tarjeta => {
+							return (
+								<Card
+									key={tarjeta._id}
+									tarjeta={tarjeta}
+									setTarjetaSeleccionada={setTarjetaSeleccionada}
+									cambiarEstadoModal={cambiarEstadoModal} >
+								</Card>
+							)
+						})
+					}
+				</Grid>
+			}
 
 			<Modal
 				estado={estadoModal}

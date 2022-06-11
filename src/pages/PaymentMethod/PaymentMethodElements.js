@@ -10,6 +10,8 @@ export const PaymentMethodContent = styled.div`
 	width: 100%;
 	color: white;
 	display: flex;
+	justify-content: center;
+	align-items: center;
 `
 
 export const Navbar = styled.nav`

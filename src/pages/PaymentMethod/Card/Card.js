@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
-import Modal from '../../../components/Modal/Modal'
-import PaymentForm from '../PaymentForm/PaymentForm'
+import React from 'react'
 import Cards from 'react-credit-cards'
 import { DivTarjeta } from '../PaymentMethodElements'
 
