@@ -1,8 +1,10 @@
+const HOST = process.env.REACT_APP_HOST
+
 export const login = (usuario) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			const url = 'http://localhost:8080/usuario/login'
-			let response = await fetch(url, {
+			const url = `http://${HOST}:8080/usuario/login`
+			const response = await fetch(url, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -21,7 +23,10 @@ export const login = (usuario) => {
 			const loggedUsuario = await response.json()
 			resolve(loggedUsuario)
 		} catch (error) {
-			reject(error)
+			console.error(error)
+			reject({
+				mensaje: 'Error de red.'
+			})
 		}
 	})
 }
@@ -29,7 +34,7 @@ export const login = (usuario) => {
 export const createUsuario = (usuario) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			const url = 'http://localhost:8080/usuario/create'
+			const url = `http://${HOST}:8080/usuario/create`
 			const response = await fetch(url, {
 				method: 'POST',
 				headers: {
@@ -41,7 +46,9 @@ export const createUsuario = (usuario) => {
 				})
 			})
 			if (!response) {
-				reject(new Error('Error de red'))
+				reject({
+					mensaje: 'Error de red.'
+				})
 				return
 			}
 			if (!response.ok) {
@@ -52,7 +59,10 @@ export const createUsuario = (usuario) => {
 			const mensaje = await response.json()
 			resolve(mensaje)
 		} catch (error) {
-			reject(error)
+			console.error(error)
+			reject({
+				mensaje: 'Error de red.'
+			})
 		}
 	})
 }

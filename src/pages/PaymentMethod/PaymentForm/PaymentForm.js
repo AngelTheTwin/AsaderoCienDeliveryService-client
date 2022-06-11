@@ -1,4 +1,4 @@
-import React, { usetarjeta } from 'react'
+import React, { useState } from 'react'
 import Cards from 'react-credit-cards'
 import 'react-credit-cards/es/styles-compiled.css'
 import {
@@ -7,20 +7,18 @@ import {
 	FormCard,
 	FormCardRow,
 	ButtonEliminarTarjeta,
-	ButtonGuardarTarjeta
+	ButtonGuardarTarjeta,
 } from './PaymentFormElements'
 
-const PaymentForm = ({ tarjeta, setTarjeta, cerrarModal, eliminarTarjeta, tarjetaDefault }) => {
-	if (!tarjeta) {
-		tarjeta = {
-			_id: '',
-			number: "",
-			name: "",
-			expiry: "",
-			cvc: "",
-			focus: ""
-		}
-	}
+const PaymentForm = ({
+	tarjeta,
+	setTarjeta,
+	eliminarTarjeta,
+	guardarNuevaTarjeta,
+	actualizarTarjeta
+}) => {
+	const [focus, setFocus] = useState('')
+	console.log(tarjeta)
 
 	const hadleInputChange = (event) => {
 		setTarjeta({
@@ -29,104 +27,84 @@ const PaymentForm = ({ tarjeta, setTarjeta, cerrarModal, eliminarTarjeta, tarjet
 		})
 	}
 
-
 	const hadleFocusChange = (event) => {
-		setTarjeta({
-			...tarjeta,
-			focus: event.target.id
-		})
+		setFocus(event.target.id)
+	}
+
+	const guardarTarjetaButtonClicked = () => {
+		if (tarjeta.isNuevaTarjeta) {
+			guardarNuevaTarjeta.mutate({
+				tarjeta: {
+					...tarjeta,
+					isNuevaTarjeta: false
+				}
+			})
+		} else {
+			actualizarTarjeta.mutate({ tarjeta })
+		}
+	}
+
+	const eliminarTarjetaButtonClicked = () => {
+		eliminarTarjeta.mutate({ tarjeta })
 	}
 
 	return (
 		<PaymentFormContent>
 			<Cards
-				number={tarjeta.number}
-				name={tarjeta.name}
-				expiry={tarjeta.expiry}
-				cvc={tarjeta.cvc}
-				focused={tarjeta.focus}
+				number={tarjeta.numeroTarjeta || ''}
+				name={tarjeta.titular || ''}
+				expiry={tarjeta.vigencia || ''}
+				cvc={tarjeta.cvv || ''}
+				focused={focus}
 			/>
-
 			<FormCard>
 				<TextField
 					placeholder='Número de tarjeta'
-					id="number"
+					id="numeroTarjeta"
 					maxLength={"16"}
-					value={tarjeta.number}
-					onChange={(event) => {
-						setTarjeta({
-							...tarjeta,
-							number: event.target.value
-						})
-					}}
-					onFocus={hadleFocusChange}
-				/>
-
-				<TextField
-					placeholder='Nombre del titular'
-					id="name"
-					maxLength={"30"}
-					value={tarjeta.name}
+					value={tarjeta.numeroTarjeta}
 					onChange={hadleInputChange}
 					onFocus={hadleFocusChange}
 				/>
-
+				<TextField
+					placeholder='Nombre del titular'
+					id="titular"
+					maxLength={"30"}
+					value={tarjeta.titular}
+					onChange={hadleInputChange}
+					onFocus={hadleFocusChange}
+				/>
 				<FormCardRow>
 					<TextField
 						placeholder='Fecha de expiración'
-						id="expiry"
+						id="vigencia"
 						maxLength={"4"}
-						value={tarjeta.expiry}
+						value={tarjeta.vigencia}
 						onChange={hadleInputChange}
 						onFocus={hadleFocusChange}
 					/>
-
 					<TextField
 						placeholder='CVV'
 						id="cvc"
 						maxLength={"4"}
-						value={tarjeta.cvc}
-						onChange={hadleInputChange}
+						value={tarjeta.cvv}
 						onFocus={hadleFocusChange}
-					/>
-				</FormCardRow>
-
-				{
-					(tarjeta._id !== '') &&
-					<ButtonEliminarTarjeta
-						onClick={() => {
-							eliminarTarjeta(tarjeta)
-							cerrarModal()
-						}}
-					>Eliminar tarjeta</ButtonEliminarTarjeta>
-				}
-
-				<ButtonGuardarTarjeta
-					onClick={() => {
-						// LLamada a API para guardar la tarjeta
-						let llamadaAPI = false
-
-						// Si la Tarjeta se gardó con exito
-						if (llamadaAPI) {
+						onChange={(event) => {
 							setTarjeta({
 								...tarjeta,
-								focus: '',
+								cvv: event.target.value
 							})
-						} else {
-							if (!tarjetaDefault) {
-								eliminarTarjeta(tarjeta)
-							} else {
-								setTarjeta({
-									...tarjetaDefault,
-									focus: '',
-								})
-							}
-							cerrarModal()
-						}
-					}}
-				>Guardar Tarjeta</ButtonGuardarTarjeta>
+						}}
+					/>
+				</FormCardRow>
+				{
+					!tarjeta.isNuevaTarjeta &&
+					<ButtonEliminarTarjeta onClick={eliminarTarjetaButtonClicked} >Eliminar tarjeta</ButtonEliminarTarjeta>
+				}
+				<ButtonGuardarTarjeta onClick={guardarTarjetaButtonClicked}>
+					Guardar Tarjeta
+				</ButtonGuardarTarjeta>
 			</FormCard>
-
 		</PaymentFormContent>
 	)
 }

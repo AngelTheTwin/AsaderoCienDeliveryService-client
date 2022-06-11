@@ -7,7 +7,6 @@ import {
 	BackButton,
 	BackIcon,
 	Button,
-	ButtonLog,
 	ButtonsContainer,
 	Divider,
 	DividerTxt,

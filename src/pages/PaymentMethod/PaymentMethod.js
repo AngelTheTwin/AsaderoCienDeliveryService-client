@@ -1,9 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Modal from '../../components/Modal/Modal'
 import { Card } from './Card/Card'
 import PaymentForm from './PaymentForm/PaymentForm'
 import { nanoid } from 'nanoid'
-
+import { 
+	createMetodoPago, 
+	deleteMetodoPago, 
+	getAllMetodosPago, 
+	updateMetodoPago 
+} from '../../data-access/metodosPagoAccess'
+import { 
+	ToastContainer, 
+	toast 
+} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import { 
+	useMutation, 
+	useQuery 
+} from 'react-query'
 import {
 	PaymentMethodContent,
 	Navbar,
@@ -18,46 +32,94 @@ import {
 } from './PaymentMethodElements'
 
 export const PaymentMethod = () => {
-
+	let toastMetodoPago
+	const toastProperties = {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+	}
+	const [listaTarjetas, setListaTarjetas] = useState([])
 	const [estadoModal, cambiarEstadoModal] = useState(false)
-	const [listaTarjetas, setListaTarjetas] = useState([
-		{
-			_id: '62a02e5c4637ed1a561e148c"',
-			number: "5555444422221311",
-			name: "Daniel",
-			expiry: "1221",
-			cvc: "5656",
-			focus: ""
-		},
-		{
-			_id: '62a02e5c4637ed1a561e1499c"',
-			number: "5555444422221111",
-			name: "Angel",
-			expiry: "1221",
-			cvc: "5656",
-			focus: ""
-		},
-	])
-	const [valoresDefecto, setValoresDefecto] = useState([])
-	console.log('listaTarjetas', listaTarjetas)
+	const [tarjetaSeleccionada, setTarjetaSeleccionada] = useState({
+		_id: '',
+		numeroTarjeta: '',
+		titular: '',
+		vigencia: '',
+		cvv: '',
+	})
 
-	useEffect(() =>{
-		setValoresDefecto(listaTarjetas)
-	}, [])
+	const { data: tarjetasIniciales, refetch } = useQuery(["getAllMetodosPago"], getAllMetodosPago, {
+		onSuccess: (tarjetas) => {
+			setListaTarjetas(tarjetas)
+		},
+		refetchOnWindowFocus: false
+	})
 
-	const obtenerTarjetaDefault = (tarjeta) => {
-		let tarjetaDefault
-		valoresDefecto.forEach(tarjetaLista =>{
-			if (tarjetaLista._id === tarjeta._id) {
-				tarjetaDefault = tarjetaLista
-				return
-			}
-		})
-		return tarjetaDefault
+	const guardarNuevaTarjeta = useMutation(({ tarjeta }) => {
+		toastMetodoPago = toast.loading('Guardando...', toastProperties)
+		return createMetodoPago(tarjeta)
+	}, {
+		onError: (error) => {
+			showToast('error', error.mensaje)
+		},
+		onSuccess: (respuesta) => {
+			showToast('success', respuesta.mensaje)
+			cambiarEstadoModal(false)
+			refetch()
+		}
+	})
+
+	const actualizarTarjeta = useMutation(({ tarjeta }) => {
+		toastMetodoPago = toast.loading('Actualizando...', toastProperties)
+		return updateMetodoPago(tarjeta)
+	}, {
+		onError: (error) => {
+			showToast('error', error.mensaje)
+		},
+		onSuccess: (respuesta) => {
+			showToast('success', respuesta.mensaje)
+			cambiarEstadoModal(false)
+			refetch()
+		}
+	})
+
+	const eliminarTarjeta = useMutation(({tarjeta}) => {
+		toastMetodoPago = toast.loading('Eliminando...', toastProperties)
+		return deleteMetodoPago(tarjeta)
+	}, {
+		onError: (error) => {
+			showToast('error', error.mensaje)
+		},
+		onSuccess: (respuesta) => {
+			showToast('success', respuesta.mensaje)
+			cambiarEstadoModal(false)
+			refetch()
+		}
+	})
+
+	const agregarNuevaTarjetaButtonClicked = () => {
+		let nuevaTarjeta = {
+			_id: nanoid(),
+			numeroTarjeta: '',
+			titular: '',
+			vigencia: '',
+			cvv: '',
+			isNuevaTarjeta: true,
+		}
+		setListaTarjetas(prevTarjetas => [
+			nuevaTarjeta,
+			...prevTarjetas
+		])
+		setTarjetaSeleccionada(nuevaTarjeta)
+		cambiarEstadoModal(!estadoModal)
 	}
 
 	const setTarjeta = (tarjeta) => {
-		setListaTarjetas(prevTarjetas =>{
+		setListaTarjetas(prevTarjetas => {
 			// let nuevasTarjetas = []
 			// for (const tarjetaActual in prevTarjetas) {
 			// 	if (tarjetaActual._id === tarjeta._id) {
@@ -78,17 +140,32 @@ export const PaymentMethod = () => {
 		})
 	}
 
-	const eliminarTarjeta = (tarjeta) => {
-		console.log("tarjeta a eliminar",tarjeta)
-		setListaTarjetas(prevTarjetas => {
-			let nuevaListaTajetas = []
-			prevTarjetas.forEach(tarjetaActual => {
-				if (!(tarjetaActual._id === tarjeta._id)) {
-					nuevaListaTajetas.push(tarjetaActual)
-				}
+	const cancelarCambios = (showModal) => {
+		if (tarjetaSeleccionada.isNuevaTarjeta) {
+			setListaTarjetas(prevListaTarjetas => {
+				prevListaTarjetas.shift()
+				return prevListaTarjetas
 			})
-			return nuevaListaTajetas
+		}
+		setTarjeta(tarjetasIniciales[indiceTarjetaSeleccionada()])
+		cambiarEstadoModal(showModal)
+	}
+
+	const showToast = (type, message) => {
+		toast.update(toastMetodoPago, {
+			render: message,
+			type: type,
+			isLoading: false,
+			...toastProperties,
 		})
+	}
+
+	const indiceTarjetaSeleccionada = () => {
+		for (var i=0; i<listaTarjetas.length; i++) {
+			if (tarjetaSeleccionada._id === listaTarjetas[i]._id) {
+				return i
+			}
+		}
 	}
 
 	return (
@@ -101,36 +178,21 @@ export const PaymentMethod = () => {
 			</Navbar>
 
 			<Grid >
-				<DivTarjeta onClick={() => {
-					setListaTarjetas(prevTarjetas => [
-						{
-							_id: nanoid(),
-							number: "",
-							name: "",
-							expiry: "",
-							cvc: "",
-							focus: ""
-						},
-						...prevTarjetas
-					])
-					cambiarEstadoModal(!estadoModal)
-				}}
-				>
+				<DivTarjeta onClick={agregarNuevaTarjetaButtonClicked}>
 					<ButtonAgregar >
 						<Plus>+</Plus>
 						<Text>Agregar nueva tarjeta</Text>
 					</ButtonAgregar>
 				</DivTarjeta>
-
 				{
 					listaTarjetas.map(tarjeta => {
 						return (
-							<Card 
+							<Card
 								key={tarjeta._id}
 								tarjeta={tarjeta}
-								tarjetaDefault= {obtenerTarjetaDefault(tarjeta)}
-								setTarjeta={setTarjeta}
-							></Card>
+								setTarjetaSeleccionada={setTarjetaSeleccionada}
+								cambiarEstadoModal={cambiarEstadoModal} >
+							</Card>
 						)
 					})
 				}
@@ -138,24 +200,20 @@ export const PaymentMethod = () => {
 
 			<Modal
 				estado={estadoModal}
-				cambiarEstado={(showModal) => {
-					setListaTarjetas(prevTarjetas => {
-						prevTarjetas.shift()
-						return prevTarjetas
-					})
-					cambiarEstadoModal(showModal)
-				}}
+				cambiarEstado={cancelarCambios}
 				title="Agregar nueva tarjeta">
-
-				<PaymentForm 
-					tarjeta={listaTarjetas[0]}
+				<PaymentForm
+					tarjeta={listaTarjetas[indiceTarjetaSeleccionada()]}
 					setTarjeta={setTarjeta}
-					cerrarModal={() => {
-						cambiarEstadoModal(false)
-					}}
+					cerrarModal={() => cambiarEstadoModal(false)}
 					eliminarTarjeta={eliminarTarjeta}
+					guardarNuevaTarjeta={guardarNuevaTarjeta}
+					actualizarTarjeta={actualizarTarjeta}
 				/>
 			</Modal>
+			<ToastContainer
+				theme='dark'
+			/>
 		</PaymentMethodContent>
 	)
 }

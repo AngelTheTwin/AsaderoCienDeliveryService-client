@@ -50,6 +50,22 @@ export const FormCardRow = styled.div`
 `
 
 export const ButtonEliminarTarjeta = styled.div`
+    background-color: #3F3F3F;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    border-radius: 20px;
+    width: 100%;
+    height: 36px;
+	transition: 0.2s ease-in-out;
+
+	&:hover {
+		background-color: white;
+		color: #3F3F3F;
+	}
+`
+
+export const ButtonGuardarTarjeta = styled.div`
     background-color: #C40B0B;
 	display: flex;
 	align-items: center;
@@ -57,15 +73,10 @@ export const ButtonEliminarTarjeta = styled.div`
     border-radius: 20px;
     width: 100%;
     height: 36px;
-    //visibility: hidden;
-`
+	transition: 0.2s ease-in-out;
 
-export const ButtonGuardarTarjeta = styled.div`
-    background-color: #17911B;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-    border-radius: 20px;
-    width: 100%;
-    height: 36px;
+	&:hover {
+		background-color: white;
+		color: #C40B0B;
+	}
 `
