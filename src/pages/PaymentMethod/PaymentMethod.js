@@ -175,7 +175,7 @@ export const PaymentMethod = () => {
 				<BackButton to="/">
 					<BackIcon />
 				</BackButton>
-				<Title >Asadero Cien - Restaurante Parrilla</Title>
+				<Title >Asadero Cien - Métodos de Pago</Title>
 			</Navbar>
 
 			{isLoading

@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import { Navbar, Title } from '../Login/LoginElements'
-import { FaBars } from 'react-icons/fa'
+import { Title } from '../Login/LoginElements'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import {
 	Encabezado,
 	HomeBody,
 	HomeContent,
 	CategoriasContainer,
-	Carrito
+	Carrito,
+	NavegationBar,
+	BurguerButton
 } from './HomeElements'
 import { Categoria } from './Categoria'
 import Modal from '../../components/Modal/Modal'
 import { Descripcion } from './Descripcion/Descripcion'
-import { Sidebar } from '../../components/Sidebar/SidebarElements'
+import SidebarMenu from '../../components/SidebarMenu/SidebarMenu'
 
 export const Home = () => {
 	const [categorias, setCategorias] = useState([])
 	const [showModal, setShowModal] = useState(false)
 	const [platilloSeleccionado, setPlatilloSeleccionado] = useState({})
 	const [carrito, setCarrito] = useState([])
+	const [estadoSidebarMenu, cambiarEstadoSidebarMenu] = useState(false)
 
 	useEffect(() => {
 		async function fetchCategorias() {
@@ -52,16 +54,23 @@ export const Home = () => {
 
 	return (
 		<HomeContent >
+			<SidebarMenu
+				estado={estadoSidebarMenu}
+				cambiarEstadoSidebarMenu={(showSidebarMenu) => {
+					cambiarEstadoSidebarMenu(showSidebarMenu)
+				}}
+			/>
+
 			<HomeBody>
-				<Navbar>
-					<FaBars />
+				<NavegationBar>
+					<BurguerButton onClick={() => cambiarEstadoSidebarMenu(!estadoSidebarMenu)}/>
 					<Title >Asadero Cien - Restaurante Parrilla</Title>
-					<Carrito to='/paymentMethod'>
+					<Carrito to='/covid19'>
 						<AiOutlineShoppingCart />
 						<span> {carrito.length}</span>
 					</Carrito>
 					
-				</Navbar>
+				</NavegationBar>
 				<Encabezado>¿De qué tienes antojo?</Encabezado>
 				<CategoriasContainer>
 					{categorias.map(categoria => {
@@ -98,8 +107,6 @@ export const Home = () => {
 					/>
 				}
 			/>
-
-			<Sidebar/>
 		</HomeContent>
 	)
 }

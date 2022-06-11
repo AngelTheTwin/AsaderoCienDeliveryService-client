@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom';
+import { Navbar } from '../Login/LoginElements'
+import { FaBars } from 'react-icons/fa'
 
 const padding = '28px';
 const paddingMovil = '10px';
@@ -11,6 +13,7 @@ export const Carrito = styled(NavLink)`
 	color: white;
 	text-decoration: none;
 	gap: 4px;
+	padding-right: 16px;
 `
 
 export const HomeContent = styled.div`
@@ -180,4 +183,11 @@ export const PrecioPlatillo = styled.p`
 		font-size: 12px;
 		line-height: 13px;
 	}
+`
+
+export const NavegationBar = styled(Navbar)`
+	justify-content: space-between;
+`
+export const BurguerButton = styled(FaBars)`
+	padding-left: 16px;
 `
