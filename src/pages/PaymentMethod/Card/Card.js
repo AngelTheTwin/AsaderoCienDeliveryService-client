@@ -11,13 +11,15 @@ export const Card = ({
 	cambiarEstadoModal
 }) => {
 
+	const tarjetaClicked = () => {
+		setTarjetaSeleccionada(tarjeta)
+		cambiarEstadoModal(true)
+	}
+
 	return (
 		<>
 			<DivTarjeta
-				onClick={() => {
-					setTarjetaSeleccionada(tarjeta)
-					cambiarEstadoModal(true)
-				}}
+				onClick={tarjetaClicked}
 			>
 				<Cards
 					number={tarjeta.numeroTarjeta || ''}
