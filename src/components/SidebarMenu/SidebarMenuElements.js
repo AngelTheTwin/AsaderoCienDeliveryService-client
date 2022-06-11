@@ -6,7 +6,7 @@ import {BsPinMap} from 'react-icons/bs'
 
 
 export const SidebarContent = styled.div`
-    width: 25%;
+    width: 17%;
     position: fixed;
     background-color: #222222;
 	color: white;
@@ -53,7 +53,7 @@ export const Li = styled.div`
 `
 
 export const Link = styled.p`
-	font-size: 85%;
+	font-size: 75%;
 	font-family: 'Secular one';
     
 `
