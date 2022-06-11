@@ -17,7 +17,7 @@ export const SidebarContent = styled.div`
     margin-left: 2%;
 
     @media screen and (max-width: 768px) {
-        width: 65%;
+        width: 45%;
 	}
 `
 
