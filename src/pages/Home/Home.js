@@ -8,36 +8,50 @@ import {
 	CategoriasContainer,
 	Carrito,
 	NavegationBar,
-	BurguerButton
+	BurguerButton,
+	DivSpinner
 } from './HomeElements'
 import { Categoria } from './Categoria'
 import Modal from '../../components/Modal/Modal'
 import { Descripcion } from './Descripcion/Descripcion'
 import SidebarMenu from '../../components/SidebarMenu/SidebarMenu'
+import { useQuery } from 'react-query'
+import { getAllProductosGroupedByCategoria } from '../../data-access/productosAccess'
+import { SpinnerCircular } from 'spinners-react'
+import {
+	ToastContainer,
+	toast
+} from 'react-toastify'
 
 export const Home = () => {
-	const [categorias, setCategorias] = useState([])
+	const toastProperties = {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+	}
+	const { data: categorias, isLoading } = useQuery(['getAllProductos'], getAllProductosGroupedByCategoria, {
+		onError: (error) => {
+			toast.error(error.mensaje, toastProperties)
+		},
+		refetchOnWindowFocus: false
+	})
 	const [showModal, setShowModal] = useState(false)
 	const [platilloSeleccionado, setPlatilloSeleccionado] = useState({})
-	const [carrito, setCarrito] = useState([])
-	const [estadoSidebarMenu, cambiarEstadoSidebarMenu] = useState(false)
+	const [platillosCarrito, setPlatillosCarrito] = useState(
+		JSON.parse(sessionStorage.getItem('carrito'))
+		|| []
+	)
+	const [showSidebarMenu, setShowSidebarMenu] = useState(false)
 
 	useEffect(() => {
-		async function fetchCategorias() {
-			try {
-				let response = await fetch('http://localhost:8080/categoria/getAllConProductos')
-				if (!response) return
-				if (!response.ok) return
-				let listaCategorias = await response.json()
-				setCategorias(listaCategorias)
-			} catch (error) {
-				console.log(error)
-			}
-		}
-		fetchCategorias()
-	}, [])
+		sessionStorage.setItem('carrito', JSON.stringify(platillosCarrito))
+	}, [platillosCarrito])
 
-	function showDetallesPlatillo(idCategoria, idPlatillo) {
+	const  showDetallesPlatillo = (idCategoria, idPlatillo) => {
 		categorias.forEach(categoria => {
 			if (categoria._id === idCategoria) {
 				categoria.productos.forEach(producto => {
@@ -52,61 +66,69 @@ export const Home = () => {
 		})
 	}
 
+	const agregarACarrito = (producto) => {
+		setPlatillosCarrito(prevCarrito => [
+			...prevCarrito,
+			producto
+		])
+		toast.success('Platillo agregado al carrito!', toastProperties)
+		setShowModal(false)
+	}
+
+	const toggleSidbarMenu = (event) => {
+		event.stopPropagation()
+		setShowSidebarMenu(prevShowSidebarMenu => !prevShowSidebarMenu)
+	}
+
+	const hideSidebarMenu = () => {
+		setShowSidebarMenu(false)
+	}
+
 	return (
 		<HomeContent >
 			<SidebarMenu
-				estado={estadoSidebarMenu}
-				cambiarEstadoSidebarMenu={(showSidebarMenu) => {
-					cambiarEstadoSidebarMenu(showSidebarMenu)
-				}}
+				estado={showSidebarMenu}
 			/>
 
-			<HomeBody>
+			<HomeBody onClick={hideSidebarMenu}>
 				<NavegationBar>
-					<BurguerButton onClick={() => cambiarEstadoSidebarMenu(!estadoSidebarMenu)}/>
+					<BurguerButton onClick={toggleSidbarMenu} />
 					<Title >Asadero Cien - Restaurante Parrilla</Title>
-					<Carrito to='/covid19'>
+					<Carrito to='/carrito' >
 						<AiOutlineShoppingCart />
-						<span> {carrito.length}</span>
 					</Carrito>
-					
+
 				</NavegationBar>
 				<Encabezado>¿De qué tienes antojo?</Encabezado>
-				<CategoriasContainer>
-					{categorias.map(categoria => {
-						return (
-							<Categoria
-								key={categoria._id}
-								{...categoria}
-								handleClick={showDetallesPlatillo}
-							/>
-						)
-					})}
-				</CategoriasContainer>
-			</HomeBody>
-			<Modal 
-				title='Descripción'
-				estado = {showModal}
-				cambiarEstado = {() => {
-					setShowModal(prevShowModal => {
-						return !prevShowModal
-					})
-				}}
-				children ={
-					<Descripcion 
-						platillo={platilloSeleccionado} 
-						agregarACarrito={() => {
-							setCarrito(prevCarrito => {
-								return [
-									...prevCarrito,
-									platilloSeleccionado,
-								]
-							})
-							setShowModal(false)
-						}}
-					/>
+				{isLoading
+					?
+					<DivSpinner>
+						<SpinnerCircular color='red' enabled={isLoading} />
+					</DivSpinner>
+					:
+					<CategoriasContainer>
+						{categorias && categorias.map(categoria => {
+							return (
+								<Categoria
+									key={categoria._id}
+									{...categoria}
+									handleClick={showDetallesPlatillo}
+								/>
+							)
+						})}
+					</CategoriasContainer>
 				}
-			/>
+			</HomeBody>
+			<Modal
+				title='Descripción'
+				estado={showModal}
+				cambiarEstado={setShowModal} >
+				<Descripcion
+					platillo={platilloSeleccionado}
+					agregarACarrito={agregarACarrito}
+				/>
+			</Modal>
+			<ToastContainer theme='dark' />
 		</HomeContent>
 	)
 }

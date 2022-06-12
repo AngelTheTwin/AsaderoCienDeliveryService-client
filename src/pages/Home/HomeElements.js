@@ -119,6 +119,7 @@ export const PlatilloContent = styled.div`
 	border-radius: 15px;
 	background-color: ${({ color }) => (color)};
 	overflow: hidden;
+	cursor: pointer;
 
 	@media screen and (max-width: 768px) {
 		height: 200px;
@@ -187,7 +188,14 @@ export const PrecioPlatillo = styled.p`
 
 export const NavegationBar = styled(Navbar)`
 	justify-content: space-between;
+	user-select: none;
 `
 export const BurguerButton = styled(FaBars)`
 	padding-left: 16px;
+	cursor: pointer;
+`
+
+export const DivSpinner = styled.div`
+	display: flex;
+	justify-content: center;
 `
