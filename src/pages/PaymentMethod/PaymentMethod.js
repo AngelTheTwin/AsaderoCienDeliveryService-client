@@ -172,7 +172,7 @@ export const PaymentMethod = () => {
 	return (
 		<PaymentMethodContent>
 			<Navbar id="nav" >
-				<BackButton to="/">
+				<BackButton to="/home">
 					<BackIcon />
 				</BackButton>
 				<Title >Asadero Cien - Métodos de Pago</Title>

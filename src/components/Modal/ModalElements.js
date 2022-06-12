@@ -36,6 +36,7 @@ export const ModalContent = styled.div`
     padding-bottom: 20px;
 	max-height: 80%;
 	overflow-y: auto;
+	top: -20px;
 
     @media screen and (max-width: 768px) {
         width: 80%;

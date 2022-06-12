@@ -1,11 +1,10 @@
 import React, { useRef, useState } from 'react'
 import Cards from 'react-credit-cards'
 import 'react-credit-cards/es/styles-compiled.css'
-import { useMutation, useQuery } from 'react-query'
-import { toast, ToastContainer } from 'react-toastify'
-import { SpinnerDiamond, SpinnerInfinity } from 'spinners-react'
+import { useQuery } from 'react-query'
+import { ToastContainer } from 'react-toastify'
+import { SpinnerInfinity } from 'spinners-react'
 import { getAllMetodosPago } from '../../../data-access/metodosPagoAccess'
-import { createPedido } from '../../../data-access/pedidosAccess'
 import { 
 	ButtonPagar,
 	FormularioPagoContent, 
@@ -15,16 +14,6 @@ import {
 } from './FormularioPagoElements'
 
 export const FormularioPago = ({guardarPedido}) => {
-	let toastFormPago
-	const toastProperties = {
-		position: "bottom-center",
-		autoClose: 5000,
-		hideProgressBar: false,
-		closeOnClick: true,
-		pauseOnHover: true,
-		draggable: true,
-		progress: undefined,
-	}
 	const [tarjetas, setTarjetas] = useState([])
 	const { isLoading } = useQuery(["getAllMetodosPago"], getAllMetodosPago, {
 		onSuccess: (tarjetas) => {
@@ -54,7 +43,7 @@ export const FormularioPago = ({guardarPedido}) => {
 	const handlePagarClicked = () => {
 		guardarPedido.mutate({
 			pedido: {
-				...pedido,
+				...pedido.current,
 				metodoPago: tarjeta,
 				// dirección
 			}
