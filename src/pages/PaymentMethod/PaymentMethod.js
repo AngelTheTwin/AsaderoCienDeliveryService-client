@@ -152,6 +152,14 @@ export const PaymentMethod = () => {
 		cambiarEstadoModal(showModal)
 	}
 
+	const indiceTarjetaSeleccionada = () => {
+		for (var i = 0; i < listaTarjetas.length; i++) {
+			if (tarjetaSeleccionada._id === listaTarjetas[i]._id) {
+				return i
+			}
+		}
+	}
+
 	const showToast = (type, message) => {
 		toast.update(toastMetodoPago, {
 			render: message,
@@ -159,14 +167,6 @@ export const PaymentMethod = () => {
 			isLoading: false,
 			...toastProperties,
 		})
-	}
-
-	const indiceTarjetaSeleccionada = () => {
-		for (var i = 0; i < listaTarjetas.length; i++) {
-			if (tarjetaSeleccionada._id === listaTarjetas[i]._id) {
-				return i
-			}
-		}
 	}
 
 	return (
@@ -179,7 +179,7 @@ export const PaymentMethod = () => {
 			</Navbar>
 
 			{isLoading
-				? <SpinnerCircular color='red' enabled={isLoading}/>
+				? <SpinnerCircular color='red' enabled={isLoading} />
 				: <Grid >
 					<DivTarjeta onClick={agregarNuevaTarjetaButtonClicked}>
 						<ButtonAgregar >

@@ -14,10 +14,36 @@ import {
 	AiOutlineMinus,
 	AiOutlinePlus
 } from 'react-icons/ai'
+import { nanoid } from 'nanoid'
 
 export const Descripcion = ({ platillo, agregarACarrito }) => {
 	const [cantidad, setCantidad] = useState(1)
 	const [instruccionesEspeciales, setInstruccionesEspeciales] = useState('')
+
+	const handleInstruccionesChange = (event) => {
+		setInstruccionesEspeciales(event.target.value)
+	}
+
+	const reducirCantidad = () => {
+		setCantidad(prevCantidad => {
+			return (prevCantidad - 1 >= 0) ? prevCantidad - 1 : 0
+		})
+	}
+
+	const incrementarCantidad = () => {
+		setCantidad(prevCantidad => {
+			return prevCantidad + 1
+		})
+	}
+
+	const buttonAgregarClicked = () => {
+		agregarACarrito({
+			_id: nanoid(),
+			platillo,
+			cantidad: cantidad,
+			instruccionesEspeciales,
+		})
+	}
 
 	return (
 		<DescripcionContent>
@@ -29,38 +55,24 @@ export const Descripcion = ({ platillo, agregarACarrito }) => {
 			<H3>Instrucciones Especiales</H3>
 			<TextArea 
 				value={instruccionesEspeciales}
-				onChange={(event) => {
-					setInstruccionesEspeciales(event.target.value)
-				}}
+				onChange={handleInstruccionesChange}
 			/>
 			<CantidadContainer>
 				<ButtonCantidad
-					onClick={() => {
-						setCantidad(prevCantidad => {
-							return (prevCantidad - 1 >= 0) ? prevCantidad - 1 : 0
-						})
-					}}
+					onClick={reducirCantidad}
 				>
 					<AiOutlineMinus />
 				</ButtonCantidad>
 				<Cantidad>{cantidad}</Cantidad>
 				<ButtonCantidad
-					onClick={() => {
-						setCantidad(prevCantidad => {
-							return prevCantidad + 1
-						})
-					}}
+					onClick={incrementarCantidad}
 				>
 					<AiOutlinePlus />
 				</ButtonCantidad>
 			</CantidadContainer>
 			<ButtonAgregar
 				disabled= {(cantidad > 0) ? false : true}
-				onClick={() => {
-					for (var i = 0; i<cantidad; i++) {
-						agregarACarrito()
-					}
-				}}
+				onClick={buttonAgregarClicked}
 			>Agregar al Carrito</ButtonAgregar>
 		</DescripcionContent>
 	)
