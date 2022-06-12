@@ -102,6 +102,11 @@ export const DivTarjeta = styled.div`
 	justify-content: center;
     padding-bottom: 16px;
 	cursor: pointer;
+	transition: 0.5s;
+
+	&:hover {
+		transform: scale(95%);
+	}
     
     @media screen and (max-width: 768px) {
         padding-bottom: 8px;

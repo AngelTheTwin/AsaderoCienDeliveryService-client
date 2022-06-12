@@ -120,6 +120,11 @@ export const PlatilloContent = styled.div`
 	background-color: ${({ color }) => (color)};
 	overflow: hidden;
 	cursor: pointer;
+	transition: 0.5s;
+
+	&:hover {
+		transform: scale(95%);
+	}
 
 	@media screen and (max-width: 768px) {
 		height: 200px;
@@ -145,7 +150,6 @@ export const InfoPlatilloContainer = styled.div`
 	font-family: 'ABeeZee';
 	font-style: normal;
 	font-weight: 400;
-	font-size: 2vw;
 	line-height: 17px;
 	display: flex;
 	flex-direction: column;
@@ -165,12 +169,10 @@ export const InfoPlatilloContainer = styled.div`
 `
 
 export const NombrePlatillo = styled.p`
-	font-size: 1.8vw;
 	white-space: nowrap;
 	margin: 0;
 
 	@media screen and (max-width: 768px) {
-		font-size: 3.4vw;
 		line-height: 14px;
 	}
 `

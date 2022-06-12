@@ -56,6 +56,7 @@ export const Carrito = () => {
 			sessionStorage.removeItem('pedido')
 			setShowFormularioPago(false)
 			setOrdenesCarrito([])
+			navigateTo('/pedidos')
 		}
 	})
 
@@ -71,7 +72,7 @@ export const Carrito = () => {
 			autoplay: true,
 			animationData: require('../../assets/empty-cart.json')
 		})
-	})
+	}, [])
 
 	const incrementarCantidad = (orden) => {
 		setOrdenesCarrito(prevOrdenesCarrito => prevOrdenesCarrito.map(prevOrden => {
