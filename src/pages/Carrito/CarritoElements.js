@@ -107,3 +107,17 @@ export const ButtonPago = styled.button`
 		transform: scaleX(90%) scaleY(94%);
 	}
 `
+
+export const AnimationContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+`
+
+export const AnimationContent = styled.div`
+	width: 30%;
+	@media screen and (max-width: 768px) {
+        width: 60%;
+	}
+`
