@@ -185,9 +185,7 @@ export const Carrito = () => {
 				cambiarEstado={setShowFormularioPago}
 				estado={showFormularioPago}
 			>
-				<FormularioPago 
-					guardarPedido={guardarPedido}
-					/>
+				<FormularioPago guardarPedido={guardarPedido} />
 			</Modal>
 			<ToastContainer theme='dark' />
 		</CarritoContent>
