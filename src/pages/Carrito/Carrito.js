@@ -144,7 +144,7 @@ export const Carrito = () => {
 				<Title>Carrito</Title>
 			</Navbar>
 			<CarritoBody>
-				{ordenesCarrito && ordenesCarrito.length != 0
+				{ordenesCarrito && ordenesCarrito.length !== 0
 					?
 					<Grid>
 						<PlatillosContainer>
