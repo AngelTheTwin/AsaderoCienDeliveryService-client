@@ -3,6 +3,8 @@ import { BiArrowBack } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom'
 import { Navbar, Title } from '../Login/LoginElements'
 import {
+	AnimationContainer,
+	AnimationContent,
 	ButtonPago,
 	ButtonRegresar,
 	CarritoBody,
@@ -23,6 +25,7 @@ import { useMutation } from 'react-query'
 import { createPedido } from '../../data-access/pedidosAccess'
 import Modal from '../../components/Modal/Modal'
 import { FormularioPago } from './FormularioPago/FormularioPago'
+import Lottie from 'lottie-web'
 
 
 export const Carrito = () => {
@@ -61,7 +64,13 @@ export const Carrito = () => {
 	}, [ordenesCarrito])
 
 	useEffect(() => {
-		
+		Lottie.loadAnimation({
+			container: emptyCart.current,
+			renderer: 'svg',
+			loop: true,
+			autoplay: true,
+			animationData: require('../../assets/empty-cart.json')
+		})
 	})
 
 	const incrementarCantidad = (orden) => {
@@ -165,7 +174,10 @@ export const Carrito = () => {
 						</TarjetaPedido>
 					</Grid>
 					:
-					'No hay ordenes'
+					<AnimationContainer>
+						<AnimationContent ref={emptyCart}/>
+						<TarjetaTitle>No has agregado platillos a tu carrito!</TarjetaTitle>
+					</AnimationContainer>
 				}
 			</CarritoBody>
 			<Modal
