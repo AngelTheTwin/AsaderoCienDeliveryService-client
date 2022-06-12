@@ -10,6 +10,7 @@ import { Login } from './pages/Login/Login'
 import { PaymentMethod } from './pages/PaymentMethod/PaymentMethod'
 import { Covid19 } from './pages/Covid19/Covid19'
 import { Carrito } from './pages/Carrito/Carrito'
+import { Pedidos } from './pages/Pedidos/Pedidos'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
 				<Route path='/paymentMethod' element={<PaymentMethod />} />
 				<Route path='/covid19' element={<Covid19 />} />
 				<Route path='/carrito' element={<Carrito />} />
+				<Route path='/pedidos' element={<Pedidos />} />
 			</Routes>
 		</Router>
 	)

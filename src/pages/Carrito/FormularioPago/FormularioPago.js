@@ -26,7 +26,6 @@ export const FormularioPago = ({guardarPedido}) => {
 	const subtotal = pedido.current.total
 	const iva = (pedido.current.total * 0.16)
 	const total = subtotal + iva
-	console.log(pedido)
 
 	const terminación = (numeroTarjeta) => {
 		 return numeroTarjeta.substring(numeroTarjeta.length - 4)

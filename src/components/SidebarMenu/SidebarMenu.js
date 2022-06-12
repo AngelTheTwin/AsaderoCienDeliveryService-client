@@ -33,7 +33,7 @@ const SidebarMenu = ({estado, nombreUsuario}) =>{
                         </Section>
 
                         <Section>
-                            <Li>
+                            <Li onClick={() => {navigate('/pedidos')}}>
                                 <Link>Tus pedidos</Link>
                                 <ReceiptIcon/>
                             </Li>

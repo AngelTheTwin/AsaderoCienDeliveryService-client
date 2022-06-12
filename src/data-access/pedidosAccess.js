@@ -34,3 +34,37 @@ export const createPedido = (pedido) => {
 		}
 	})
 }
+
+export const getAllPedidosByUsuario = () => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const usuario = JSON.parse(sessionStorage.getItem('usuario'))
+			const url = `http://${HOST}:8080/pedido/getAllByUsuario`
+			const response = await fetch(url, {
+				method: 'GET',
+				headers: {
+					Authorization: `Bearer ${usuario.token}`,
+					'Content-Type': 'application/json',
+				},
+			})
+			if (!response) {
+				reject({
+					error: 'Error de red.'
+				})
+				return
+			}
+			if (!response.ok) {
+				const error = await response.json()
+				reject(error)
+				return
+			}
+			const pedidos = await response.json()
+			resolve(pedidos)
+		} catch (error) {
+			console.error(error)
+			reject({
+				mensaje: 'Error de red.'
+			})
+		}
+	})
+}

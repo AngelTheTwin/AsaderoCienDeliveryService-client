@@ -18,7 +18,6 @@ const PaymentForm = ({
 	actualizarTarjeta
 }) => {
 	const [focus, setFocus] = useState('')
-	console.log(tarjeta)
 
 	const hadleInputChange = (event) => {
 		setTarjeta({
