@@ -5,7 +5,6 @@ export const PedidoContent = styled.div`
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	
 `
 
 export const TarjetaPedido = styled.div`

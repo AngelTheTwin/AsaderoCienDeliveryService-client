@@ -126,6 +126,10 @@ export const PlatilloContent = styled.div`
 		transform: scale(95%);
 	}
 
+	&:active {
+		transform: scale(90%);
+	}
+
 	@media screen and (max-width: 768px) {
 		height: 200px;
 		min-height: 200px;

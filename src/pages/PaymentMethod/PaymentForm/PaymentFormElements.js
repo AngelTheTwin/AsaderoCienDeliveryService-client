@@ -57,11 +57,16 @@ export const ButtonEliminarTarjeta = styled.div`
     border-radius: 20px;
     width: 100%;
     height: 36px;
-	transition: 0.2s ease-in-out;
+	transition: 0.5s;
 
 	&:hover {
-		background-color: white;
 		color: #3F3F3F;
+		background-color: white;
+	}
+
+	&:active {
+		transition: 0.1s;
+		transform: scaleX(90%) scaleY(94%);
 	}
 `
 
@@ -73,10 +78,15 @@ export const ButtonGuardarTarjeta = styled.div`
     border-radius: 20px;
     width: 100%;
     height: 36px;
-	transition: 0.2s ease-in-out;
+	transition: 0.5s;
 
 	&:hover {
-		background-color: white;
 		color: #C40B0B;
+		background-color: white;
+	}
+
+	&:active {
+		transition: 0.1s;
+		transform: scaleX(90%) scaleY(94%);
 	}
 `

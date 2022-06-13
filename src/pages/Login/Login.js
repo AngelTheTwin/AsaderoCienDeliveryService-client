@@ -99,7 +99,7 @@ export function FormularioLogin(props) {
 				correo,
 				contraseña
 			})
-			sessionStorage.setItem('usuario', JSON.stringify(usuario))
+			localStorage.setItem('usuario', JSON.stringify(usuario))
 			navigate("../home")
 		} catch (error) {
 			toast.update(toastLogin, {

@@ -152,12 +152,16 @@ export const ButtonAgregar = styled.button`
 	background-color: #C40C0C;
 	color: white;
 	border: none;
-	transition: 0.2s ease-in-out;
+	transition: 0.5s;
 
 	&:hover {
+		color: #C40C0C;
 		background-color: white;
-		color: black;
-		transition: 0.2s ease-in-out;
+	}
+
+	&:active {
+		transition: 0.1s;
+		transform: scaleX(90%) scaleY(94%);
 	}
 
 	&:disabled {

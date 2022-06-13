@@ -29,6 +29,7 @@ import {
 	Plus,
 	Text,
 	DivTarjeta,
+	DivContainer,
 } from './PaymentMethodElements'
 import { SpinnerCircular } from 'spinners-react'
 
@@ -175,18 +176,20 @@ export const PaymentMethod = () => {
 				<BackButton to="/home">
 					<BackIcon />
 				</BackButton>
-				<Title >Asadero Cien - Métodos de Pago</Title>
+				<Title >Métodos de Pago</Title>
 			</Navbar>
 
 			{isLoading
 				? <SpinnerCircular color='red' enabled={isLoading} />
 				: <Grid >
-					<DivTarjeta onClick={agregarNuevaTarjetaButtonClicked}>
-						<ButtonAgregar >
-							<Plus>+</Plus>
-							<Text>Agregar nueva tarjeta</Text>
-						</ButtonAgregar>
-					</DivTarjeta>
+					<DivContainer>
+						<DivTarjeta onClick={agregarNuevaTarjetaButtonClicked}>
+							<ButtonAgregar >
+								<Plus>+</Plus>
+								<Text>Agregar nueva tarjeta</Text>
+							</ButtonAgregar>
+						</DivTarjeta>
+					</DivContainer>
 					{
 						listaTarjetas.map(tarjeta => {
 							return (
@@ -205,11 +208,10 @@ export const PaymentMethod = () => {
 			<Modal
 				estado={estadoModal}
 				cambiarEstado={cancelarCambios}
-				title="Agregar nueva tarjeta">
+				title="Metodo de Pago">
 				<PaymentForm
 					tarjeta={listaTarjetas[indiceTarjetaSeleccionada()]}
 					setTarjeta={setTarjeta}
-					cerrarModal={() => cambiarEstadoModal(false)}
 					eliminarTarjeta={eliminarTarjeta}
 					guardarNuevaTarjeta={guardarNuevaTarjeta}
 					actualizarTarjeta={actualizarTarjeta}

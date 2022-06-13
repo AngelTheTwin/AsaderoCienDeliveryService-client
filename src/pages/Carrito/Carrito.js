@@ -165,11 +165,7 @@ export const Carrito = () => {
 						<TarjetaPedido>
 							<div>
 								<TarjetaTitle>Subtotal</TarjetaTitle>
-								<Subtotal>$
-									{
-										calcularTotal()
-									}.00
-								</Subtotal>
+								<Subtotal>${calcularTotal().toFixed(2)}</Subtotal>
 							</div>
 							<ButtonPago onClick={procederAlPago}>Proceder al pago</ButtonPago>
 						</TarjetaPedido>
