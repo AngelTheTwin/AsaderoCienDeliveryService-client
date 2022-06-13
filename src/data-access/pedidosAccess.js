@@ -1,9 +1,11 @@
+import { handleError, processResponse } from "./accessUtils"
+
 const HOST = process.env.REACT_APP_HOST
 
 export const createPedido = (pedido) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			const usuario = JSON.parse(sessionStorage.getItem('usuario'))
+			const usuario = JSON.parse(localStorage.getItem('usuario'))
 			const url = `http://${HOST}:8080/pedido/create`
 			const response = await fetch(url, {
 				method: 'POST',
@@ -13,24 +15,9 @@ export const createPedido = (pedido) => {
 				},
 				body: JSON.stringify(pedido)
 			})
-			if (!response) {
-				reject({
-					error: 'Error de red.'
-				})
-				return
-			}
-			if (!response.ok) {
-				const error = await response.json()
-				reject(error)
-				return
-			}
-			const mensaje = await response.json()
-			resolve(mensaje)
+			processResponse(response, reject, resolve)
 		} catch (error) {
-			console.error(error)
-			reject({
-				mensaje: 'Error de red.'
-			})
+			handleError(error, reject)
 		}
 	})
 }
@@ -38,7 +25,7 @@ export const createPedido = (pedido) => {
 export const getAllPedidosByUsuario = () => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			const usuario = JSON.parse(sessionStorage.getItem('usuario'))
+			const usuario = JSON.parse(localStorage.getItem('usuario'))
 			const url = `http://${HOST}:8080/pedido/getAllByUsuario`
 			const response = await fetch(url, {
 				method: 'GET',
@@ -47,24 +34,9 @@ export const getAllPedidosByUsuario = () => {
 					'Content-Type': 'application/json',
 				},
 			})
-			if (!response) {
-				reject({
-					error: 'Error de red.'
-				})
-				return
-			}
-			if (!response.ok) {
-				const error = await response.json()
-				reject(error)
-				return
-			}
-			const pedidos = await response.json()
-			resolve(pedidos)
+			processResponse(response, reject, resolve)
 		} catch (error) {
-			console.error(error)
-			reject({
-				mensaje: 'Error de red.'
-			})
+			handleError(error, reject)
 		}
 	})
 }

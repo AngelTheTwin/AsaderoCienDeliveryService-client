@@ -18,7 +18,7 @@ export const P = styled.p`
 	}
 `
 
-export const Tarjetas = styled.select`
+export const Select = styled.select`
 	background-color: white;
 	color: #222;
 	height: 30px;

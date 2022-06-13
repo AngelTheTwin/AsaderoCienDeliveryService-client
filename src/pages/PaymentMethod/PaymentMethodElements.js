@@ -57,7 +57,13 @@ export const Grid = styled.div`
 	align-items: center;
 	justify-content: center;
 
-    @media screen and (max-width: 768px) {
+	@media screen and (max-width: 940px) {
+		grid-template-columns: 1fr 1fr;
+		padding-left: 0px;
+    	padding-right: 0px;
+	}
+
+    @media screen and (max-width: 650px) {
 		grid-template-columns: 1fr;
 		padding-left: 0px;
     	padding-right: 0px;
@@ -71,14 +77,10 @@ export const ButtonAgregar = styled.div`
 	align-items: center;
 	justify-content: center;
     border-radius: 15px;
-    width: 71%;
+    width: 100%;
     aspect-ratio: 16/9;
     align-self: center;
     cursor: pointer;
-
-	@media screen and (max-width: 768px) {
-		width: 80%;
-	}
 `
 
 export const Plus = styled.div`
@@ -100,15 +102,28 @@ export const DivTarjeta = styled.div`
     height: fit-content;
     align-items: center;
 	justify-content: center;
-    padding-bottom: 16px;
 	cursor: pointer;
 	transition: 0.5s;
+	max-width: 290px;
+	max-height: 183px;
 
 	&:hover {
 		transform: scale(95%);
+	}
+
+	&:active {
+		transform: scale(90%);
 	}
     
     @media screen and (max-width: 768px) {
         padding-bottom: 8px;
 	}
+`
+
+export const DivContainer = styled.div`
+	display: flex;
+	width: 100%;
+    height: fit-content;
+    align-items: center;
+	justify-content: center;
 `

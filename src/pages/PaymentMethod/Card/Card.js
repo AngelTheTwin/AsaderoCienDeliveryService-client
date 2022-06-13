@@ -1,6 +1,6 @@
 import React from 'react'
 import Cards from 'react-credit-cards'
-import { DivTarjeta } from '../PaymentMethodElements'
+import { DivContainer, DivTarjeta } from '../PaymentMethodElements'
 
 
 export const Card = ({ 
@@ -15,7 +15,7 @@ export const Card = ({
 	}
 
 	return (
-		<>
+		<DivContainer>
 			<DivTarjeta
 				onClick={tarjetaClicked}
 			>
@@ -27,7 +27,7 @@ export const Card = ({
 					focused={''}
 				/>
 			</DivTarjeta>
-		</>
+		</DivContainer>
 
 	)
 }

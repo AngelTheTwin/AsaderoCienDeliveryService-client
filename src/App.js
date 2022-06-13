@@ -11,6 +11,7 @@ import { PaymentMethod } from './pages/PaymentMethod/PaymentMethod'
 import { Covid19 } from './pages/Covid19/Covid19'
 import { Carrito } from './pages/Carrito/Carrito'
 import { Pedidos } from './pages/Pedidos/Pedidos'
+import { Direcciones } from './pages/Direcciones/Direcciones'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
 				<Route path='/covid19' element={<Covid19 />} />
 				<Route path='/carrito' element={<Carrito />} />
 				<Route path='/pedidos' element={<Pedidos />} />
+				<Route path='/direcciones' element={<Direcciones />} />
 			</Routes>
 		</Router>
 	)

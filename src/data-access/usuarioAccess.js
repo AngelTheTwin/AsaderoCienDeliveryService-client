@@ -1,3 +1,5 @@
+import { handleError, processResponse } from "./accessUtils"
+
 const HOST = process.env.REACT_APP_HOST
 
 export const login = (usuario) => {
@@ -11,22 +13,9 @@ export const login = (usuario) => {
 				},
 				body: JSON.stringify(usuario)
 			})
-			if (!response) {
-				reject(new Error('Error de red'))
-				return
-			}
-			if (!response.ok) {
-				const error = await response.json()
-				reject(error)
-				return
-			}
-			const loggedUsuario = await response.json()
-			resolve(loggedUsuario)
+			processResponse(response, reject, resolve)
 		} catch (error) {
-			console.error(error)
-			reject({
-				mensaje: 'Error de red.'
-			})
+			handleError(error, reject)
 		}
 	})
 }
@@ -45,24 +34,9 @@ export const createUsuario = (usuario) => {
 					tipoUsuario: 'consumidor'
 				})
 			})
-			if (!response) {
-				reject({
-					mensaje: 'Error de red.'
-				})
-				return
-			}
-			if (!response.ok) {
-				const error = await response.json()
-				reject(error)
-				return
-			}
-			const mensaje = await response.json()
-			resolve(mensaje)
+			processResponse(response, reject, resolve)
 		} catch (error) {
-			console.error(error)
-			reject({
-				mensaje: 'Error de red.'
-			})
+			handleError(error, reject)
 		}
 	})
 }

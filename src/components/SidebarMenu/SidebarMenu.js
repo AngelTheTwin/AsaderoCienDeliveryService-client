@@ -43,7 +43,7 @@ const SidebarMenu = ({estado, nombreUsuario}) =>{
                                 <PaymentIcon/>
                             </Li>
 
-                            <Li>
+                            <Li onClick={() => navigate('/direcciones')}>
                                 <Link>Direcciones de entrega</Link>
                                 <PinUser/>
                             </Li>

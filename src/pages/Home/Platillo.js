@@ -21,7 +21,7 @@ export const Platillo = (props) => {
 				color={props.color}
 			>
 				<NombrePlatillo>{props.nombre}</NombrePlatillo>
-				<PrecioPlatillo>${props.precio}.00</PrecioPlatillo>
+				<PrecioPlatillo>${props.precio.toFixed(2)}</PrecioPlatillo>
 			</InfoPlatilloContainer>
 		</PlatilloContent>
 	)

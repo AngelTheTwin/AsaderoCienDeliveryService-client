@@ -40,7 +40,7 @@ export const PlatilloCarrito = ({
 				</ButtonEliminar>
 			</InfoPlatillo>
 			<Precio>
-				${orden.platillo.precio * orden.cantidad}.00
+				${(orden.platillo.precio * orden.cantidad).toFixed(2)}
 			</Precio>
 		</PlatilloContent>
 	)
