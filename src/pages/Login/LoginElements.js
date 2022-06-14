@@ -185,12 +185,15 @@ export const Button = styled.button`
 	padding: 10px;
 	width: 100%;
 	cursor: pointer;
-	transition: 0.2s ease-in-out;
+	transition: 0.5s;
 
 	&:hover{
-		color: black;
+		color: #C40B0B;
 		background-color: white;
-		transition: 0.2s ease-in-out;
+	}
+
+	&:active{
+		transform: scale(90%);
 	}
 `
 
@@ -221,12 +224,15 @@ export const LoginButton = styled.div`
 	background: ${({ color }) => color};
 	border-radius: 10px;
 	cursor: pointer;
-	transition: 0.2s ease-in-out;
+	transition: 0.5s;
 
 	&:hover{
 		color: ${({ color }) => color};
 		background-color: white;
-		transition: 0.2s ease-in-out;
+	}
+
+	&:active{
+		transform: scale(80%);
 	}
 `
 

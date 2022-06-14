@@ -2,23 +2,30 @@ import React from 'react'
 import { ContenidoDetallesPedido, FlexBox, NombrePlatillo, P, Precio } from './DetallesPedidoElements'
 
 export const DetallesPedido = ({ pedido }) => {
-	const colorEstado = () => {
-		switch (pedido.estado) {
-			case 'En proceso':
-				return {
-					color: '#C37E17'
-				}
-			case 'Entregado':
-				return {
-					color: '#17911B'
-				}
+	const estiloEstado = () => {
+		if (pedido.estado === 'En proceso') {
+			return '#C37E17'
+		}
+
+		if (pedido.estado === 'En camino') {
+			return '#C37E17'
+		}
+
+		if (pedido.estado === 'Entregado') {
+			return '#17911B'
+		}
+
+		if (pedido.estado === 'Cancelado') {
+			return '#C40B0B'
 		}
 	}
 
 	return (
 		<ContenidoDetallesPedido>
 			<FlexBox>
-				<P style={colorEstado()}>{pedido.estado}</P>
+				<P style={{
+					color: estiloEstado()
+				}}>{pedido.estado}</P>
 				<P>{new Date(pedido.fecha).toLocaleString()}</P>
 				<P></P>
 			</FlexBox>

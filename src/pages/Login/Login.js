@@ -100,7 +100,12 @@ export function FormularioLogin(props) {
 				contraseña
 			})
 			localStorage.setItem('usuario', JSON.stringify(usuario))
-			navigate("../home")
+			if (usuario.tipoUsuario === 'consumidor') {
+				navigate('/home')
+			}
+			if (usuario.tipoUsuario === 'repartidor') {
+				navigate('/pedidosRepartidor')
+			}
 		} catch (error) {
 			toast.update(toastLogin, {
 				render: error.mensaje,

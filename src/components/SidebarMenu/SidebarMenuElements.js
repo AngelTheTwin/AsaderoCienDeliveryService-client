@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {BiUserCircle, BiReceipt} from 'react-icons/bi'
+import {BiUserCircle, BiReceipt, BiLogOut } from 'react-icons/bi'
 import {MdOutlinePayment} from 'react-icons/md'
 import {RiMapPinUserLine, RiSurgicalMaskLine} from 'react-icons/ri'
 import {BsPinMap} from 'react-icons/bs'
@@ -15,7 +15,7 @@ export const SidebarContent = styled.div`
     padding-right: 20px;
     padding-bottom: 15px;
     margin-left: 2%;
-
+	z-index: 9999999;
     @media screen and (max-width: 768px) {
         width: 45%;
 	}
@@ -45,10 +45,11 @@ export const Li = styled.div`
     padding-right: 10px;
     border-radius: 5px;
     cursor: pointer;
+	transition: 0.5s;
 
 	&:hover{
         background-color: #323232;
-        width: 102%;
+		transform: scale(105%);
     }
 `
 
@@ -79,5 +80,9 @@ export const SurgicalMask = styled(RiSurgicalMaskLine)`
 `
 
 export const PinMap = styled(BsPinMap)`
+	font-size: 130%;
+`
+
+export const LogOutIcon = styled(BiLogOut)`
 	font-size: 130%;
 `

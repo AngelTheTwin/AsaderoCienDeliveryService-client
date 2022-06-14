@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import{
     SidebarContent,
     BodySidebar,
@@ -10,60 +10,74 @@ import{
     ReceiptIcon,
     PinUser,
     SurgicalMask,
-    PinMap
+    PinMap,
+	LogOutIcon
 }from "./SidebarMenuElements"
-
 import { useNavigate } from 'react-router-dom'
 
-const SidebarMenu = ({estado, nombreUsuario}) =>{
+const SidebarMenu = ({estado}) =>{
 
     const navigate = useNavigate()
+	const usuario = useRef(JSON.parse(localStorage.getItem('usuario')))
 
-    return(
+	const logOut = () => {
+		navigate('/')
+		localStorage.clear()
+		sessionStorage.clear()
+	}
+
+    return (
 		<>
         {estado &&
-                <SidebarContent>
-                    <BodySidebar>
+			<SidebarContent>
+				<BodySidebar>
 
-                        <Section>
-                            <Li>
-                                <Link>{nombreUsuario}</Link>
-                                <UserIcon/>
-                            </Li>
-                        </Section>
+					<Section>
+						<Li>
+							<Link>{usuario.current.nombre}</Link>
+							<UserIcon/>
+						</Li>
+					</Section>
 
-                        <Section>
-                            <Li onClick={() => {navigate('/pedidos')}}>
-                                <Link>Tus pedidos</Link>
-                                <ReceiptIcon/>
-                            </Li>
-                            
-                            <Li onClick={() => navigate("/paymentMethod")}>
-                                <Link>Métodos de pago</Link>
-                                <PaymentIcon/>
-                            </Li>
+					<Section>
+						<Li onClick={() => {navigate('/pedidos')}}>
+							<Link>Tus pedidos</Link>
+							<ReceiptIcon/>
+						</Li>
+						
+						<Li onClick={() => navigate("/paymentMethod")}>
+							<Link>Métodos de pago</Link>
+							<PaymentIcon/>
+						</Li>
 
-                            <Li onClick={() => navigate('/direcciones')}>
-                                <Link>Direcciones de entrega</Link>
-                                <PinUser/>
-                            </Li>
-                        </Section>
+						<Li onClick={() => navigate('/direcciones')}>
+							<Link>Direcciones de entrega</Link>
+							<PinUser/>
+						</Li>
+					</Section>
 
-                        <Section>
-                            <Li onClick={() => navigate("/covid19")}>
-                                <Link>COVID-19: Centro de seguridad</Link>
-                                <SurgicalMask/>
-                            </Li>
+					<Section>
+						<Li onClick={() => navigate("/covid19")}>
+							<Link>COVID-19: Centro de seguridad</Link>
+							<SurgicalMask/>
+						</Li>
 
-                            <Li>
-                                <Link>Sucursales</Link>
-                                <PinMap/>
-                            </Li>
-                        </Section>
-                        
-                    </BodySidebar>
-                </SidebarContent>
-			}
+						<Li>
+							<Link>Sucursales</Link>
+							<PinMap/>
+						</Li>
+					</Section>
+
+					<Section onClick={logOut}>
+						<Li>
+							<Link>Cerrar Sesion</Link>
+							<LogOutIcon />
+						</Li>
+					</Section>
+					
+				</BodySidebar>
+			</SidebarContent>
+		}
 		</>
     )
 }
