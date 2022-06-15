@@ -8,15 +8,21 @@ export const Pedido = ({ pedido }) => {
 	const fecha = new Date(pedido.fecha)
 
 	const colorEstado = () => {
-		switch (pedido.estado) {
-			case 'En proceso':
-				return {
-					color: '#C37E17'
-				}
-			case 'Entregado' :
-				return {
-					color: '#17911B'
-				}
+		console.log(pedido)
+		if (pedido.estado === 'En proceso') {
+			return 'white'
+		}
+
+		if (pedido.estado === 'En Camino') {
+			return '#C37E17'
+		}
+
+		if (pedido.estado === 'Entregado') {
+			return '#17911B'
+		}
+
+		if (pedido.estado === 'Cancelado') {
+			return '#C40B0B'
 		}
 	}
 	
@@ -34,7 +40,9 @@ export const Pedido = ({ pedido }) => {
 				<InfoPedido>
 					<P>{numeroArticulos()} articulo(s) - ${pedido.total.toFixed(2)}</P>
 					<P>{fecha.toLocaleString()}</P>
-					<P style={colorEstado()}>{pedido.estado}</P>
+					<P style={{
+						color: colorEstado()
+					}}>{pedido.estado}</P>
 					<Folio>Folio: {pedido._id}</Folio>
 				</InfoPedido>
 				<DivButton>
