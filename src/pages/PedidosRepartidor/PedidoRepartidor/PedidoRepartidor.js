@@ -8,7 +8,6 @@ export const PedidoRepartidor = ({
 	openModal,
 }) => {
 	const estiloEstado = () => {
-		console.log(pedido)
 		if (pedido.estado === 'En proceso') {
 			return 'white'
 		}

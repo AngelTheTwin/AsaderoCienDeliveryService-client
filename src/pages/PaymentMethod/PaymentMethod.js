@@ -112,27 +112,20 @@ export const PaymentMethod = () => {
 			cvv: '',
 			isNuevaTarjeta: true,
 		}
-		setListaTarjetas(prevTarjetas => [
-			nuevaTarjeta,
-			...prevTarjetas
-		])
 		setTarjetaSeleccionada(nuevaTarjeta)
 		cambiarEstadoModal(!estadoModal)
 	}
 
 	const setTarjeta = (tarjeta) => {
+		if (tarjeta.isNuevaTarjeta) {
+			setTarjetaSeleccionada(prevTarjetaSeleccionada => ({
+				...prevTarjetaSeleccionada,
+				...tarjeta
+			}))
+			return
+		}
+		
 		setListaTarjetas(prevTarjetas => {
-			// let nuevasTarjetas = []
-			// for (const tarjetaActual in prevTarjetas) {
-			// 	if (tarjetaActual._id === tarjeta._id) {
-			// 		nuevasTarjetas.push(tarjeta)
-			// 	} else {
-			// 		nuevasTarjetas.push(tarjetaActual)
-			// 	}
-			// }
-
-			// return nuevasTarjetas
-
 			return prevTarjetas.map(tarjetaActual => {
 				if (tarjetaActual._id === tarjeta._id) {
 					return tarjeta
@@ -144,13 +137,19 @@ export const PaymentMethod = () => {
 
 	const cancelarCambios = (showModal) => {
 		if (tarjetaSeleccionada.isNuevaTarjeta) {
-			setListaTarjetas(prevListaTarjetas => {
-				prevListaTarjetas.shift()
-				return prevListaTarjetas
+			setTarjetaSeleccionada({
+				_id: '',
+				numeroTarjeta: '',
+				titular: '',
+				vigencia: '',
+				cvv: '',
 			})
+			cambiarEstadoModal(showModal)
+			return
 		}
 		setTarjeta(tarjetasIniciales[indiceTarjetaSeleccionada()])
 		cambiarEstadoModal(showModal)
+		
 	}
 
 	const indiceTarjetaSeleccionada = () => {
@@ -210,11 +209,12 @@ export const PaymentMethod = () => {
 				cambiarEstado={cancelarCambios}
 				title="Metodo de Pago">
 				<PaymentForm
-					tarjeta={listaTarjetas[indiceTarjetaSeleccionada()]}
+					tarjeta={listaTarjetas[indiceTarjetaSeleccionada()] || tarjetaSeleccionada}
 					setTarjeta={setTarjeta}
 					eliminarTarjeta={eliminarTarjeta}
 					guardarNuevaTarjeta={guardarNuevaTarjeta}
 					actualizarTarjeta={actualizarTarjeta}
+					toast={toast}
 				/>
 			</Modal>
 			<ToastContainer

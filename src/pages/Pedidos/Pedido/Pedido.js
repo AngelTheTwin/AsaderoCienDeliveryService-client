@@ -8,7 +8,6 @@ export const Pedido = ({ pedido }) => {
 	const fecha = new Date(pedido.fecha)
 
 	const colorEstado = () => {
-		console.log(pedido)
 		if (pedido.estado === 'En proceso') {
 			return 'white'
 		}
