@@ -1,5 +1,4 @@
 import React from 'react'
-import { FiMapPin } from 'react-icons/fi'
 import { GrStatusCriticalSmall } from 'react-icons/gr'
 import { Consumidor, InfoPedidoContainer, P, PedidoRepartidorContent, PinContainer, TarjetaPedido } from './PedidoRepartidorElements'
 

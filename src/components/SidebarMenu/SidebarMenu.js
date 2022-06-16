@@ -10,7 +10,6 @@ import{
     ReceiptIcon,
     PinUser,
     SurgicalMask,
-    PinMap,
 	LogOutIcon
 }from "./SidebarMenuElements"
 import { useNavigate } from 'react-router-dom'

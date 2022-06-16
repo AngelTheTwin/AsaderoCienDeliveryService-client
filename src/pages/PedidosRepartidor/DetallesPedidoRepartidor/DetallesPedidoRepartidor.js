@@ -1,6 +1,5 @@
 import React from 'react'
 import { Campo, TextField, P } from '../../Direcciones/FormularioDireccion/FormularioDireccionElements'
-import { ContenidoDetallesPedido } from '../../Pedidos/DetallesPedido/DetallesPedidoElements'
 import { ButtonCancelarPedido, ButtonEntregarPedido, ButtonTomarPedido, ContainerBotones, DetallesPedidoRepartidorContent } from './DetallesPedidoRepartidorElements'
 
 export const DetallesPedidoRepartidor = ({ pedido, disponible, update }) => {
