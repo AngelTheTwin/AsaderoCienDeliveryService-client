@@ -93,6 +93,14 @@ export function FormularioLogin(props) {
 	const [contraseña, setContraseña] = useState('')
 
 	const buttonLoginClicked = async () => {
+		if (correo === '') {
+			toast.warn('Asegúrese de proporcionar un correo!', toastProperties)
+			return
+		}
+		if (contraseña === '') {
+			toast.warn('Asegúrese de  proporcionar una contraseña!', toastProperties)
+			return 
+		}
 		const toastLogin = toast.loading('Iniciando Sesión', toastProperties)
 		try {
 			const usuario = await login({
@@ -180,6 +188,26 @@ function FormularioRegistro(props) {
 	}
 
 	const buttonRegistrarseClicked = async () => {
+		if (formData.nombre === '') {
+			toast.warn('Asegúrese de proporcionar un nombre!', toastProperties)
+			return
+		}
+		if (formData.apellido === '') {
+			toast.warn('Asegúrese de proporcionar un apellido!', toastProperties)
+			return
+		}
+		if (formData.correo === '') {
+			toast.warn('Asegúrese de proporcionar un correo!', toastProperties)
+			return
+		}
+		if (!telefono) {
+			toast.warn('Asegúrese de proporcionar un telefono!', toastProperties)
+			return
+		}
+		if (formData.contraseña === '') {
+			toast.warn('Asegúrese de proporcionar una contraseña!', toastProperties)
+			return
+		}
 		const toastRegistro = toast.loading('Registrándote...', toastProperties)
 		try {
 			const mensaje = await createUsuario({

@@ -15,8 +15,18 @@ const PaymentForm = ({
 	setTarjeta,
 	eliminarTarjeta,
 	guardarNuevaTarjeta,
-	actualizarTarjeta
+	actualizarTarjeta,
+	toast
 }) => {
+	const toastProperties = {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+	}
 	const [focus, setFocus] = useState('')
 
 	const hadleInputChange = (event) => {
@@ -31,6 +41,22 @@ const PaymentForm = ({
 	}
 
 	const guardarTarjetaButtonClicked = () => {
+		if (tarjeta.titular === '') {
+			toast.warn('Asegúrese de proporcionar un Número de tarjeta!', toastProperties)
+			return
+		}
+		if (tarjeta.numeroTarjeta === '') {
+			toast.warn('Asegúrese de proporcionar un titular!', toastProperties)
+			return
+		}
+		if (tarjeta.vigencia === '') {
+			toast.warn('Asegúrese de proporcionar una vigencia!', toastProperties)
+			return
+		}
+		if (tarjeta.cvv === '') {
+			toast.warn('Asegúrese de proporcionar un cvv!', toastProperties)
+			return
+		}
 		if (tarjeta.isNuevaTarjeta) {
 			guardarNuevaTarjeta.mutate({
 				tarjeta: {

@@ -75,7 +75,6 @@ export const Direcciones = () => {
 	}
 
 	const openFormulario = (direccion) => {
-		console.log('clicked')
 		if (!direccion) {
 			const nuevaDireccion = {
 				_id: '',

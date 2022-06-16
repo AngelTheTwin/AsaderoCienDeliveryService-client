@@ -1,4 +1,5 @@
 import React from 'react'
+import { toast } from 'react-toastify'
 import { Boton, BotonEliminar, Campo, FormularioDireccionContent, P, Select, TelefonoTextField, TextField } from './FormularioDireccionElements'
 
 export const FormuarioDireccion = ({
@@ -8,6 +9,15 @@ export const FormuarioDireccion = ({
 	actualizarDireccion,
 	eliminarDireccion
 }) => {
+	const toastProperties = {
+		position: "bottom-center",
+		autoClose: 5000,
+		hideProgressBar: false,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+	}
 
 	const handleInputChange = (event) => {
 		setDireccion({
@@ -24,6 +34,30 @@ export const FormuarioDireccion = ({
 	}
 
 	const handleGuardarClicked = () => {
+		if(direccion.titular === '') {
+			toast.warn('Asegúrese de proporcionar un nombre!', toastProperties)
+			return
+		}
+		if(direccion.calle === '') {
+			toast.warn('Asegúrese de proporcionar una calle!', toastProperties)
+			return
+		}
+		if(direccion.ciudad === '') {
+			toast.warn('Asegúrese de proporcionar una ciudad!', toastProperties)
+			return
+		}
+		if(direccion.colonia === '') {
+			toast.warn('Asegúrese de proporcionar una colonia!', toastProperties)
+			return
+		}
+		if(direccion.codigoPostal === '') {
+			toast.warn('Asegúrese de proporcionar un código postal!', toastProperties)
+			return
+		}
+		if(!direccion.contacto) {
+			toast.warn('Asegúrese de proporcionar un teléfono de contacto!', toastProperties)
+			return
+		}
 		if (direccion.isNuevaDireccion) {
 			guardarNuevaDireccion.mutate({ direccion })
 		} else {
@@ -61,7 +95,7 @@ export const FormuarioDireccion = ({
 					name='ciudad'
 					value={direccion.ciudad}
 					onChange={handleInputChange}>
-					<option >Seleccionar</option>
+					<option value='' >Seleccionar</option>
 					<option value='Xalapa'>Xalapa</option>
 					<option value='Veracruz'>Veracruz</option>
 				</Select>
