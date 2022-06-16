@@ -92,7 +92,9 @@ export const Home = () => {
 
 			<HomeBody onClick={hideSidebarMenu}>
 				<NavegationBar>
-					<BurguerButton onClick={toggleSidbarMenu} />
+					<div id="burguerButton" onClick={toggleSidbarMenu}>
+						<BurguerButton/>
+					</div>
 					<Title >Asadero Cien - Restaurante Parrilla</Title>
 					<Carrito to='/carrito' >
 						<AiOutlineShoppingCart />

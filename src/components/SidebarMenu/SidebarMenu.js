@@ -40,36 +40,36 @@ const SidebarMenu = ({estado}) =>{
 					</Section>
 
 					<Section>
-						<Li onClick={() => {navigate('/pedidos')}}>
+						<Li id="buttonPedidos" onClick={() => {navigate('/pedidos')}}>
 							<Link>Tus pedidos</Link>
 							<ReceiptIcon/>
 						</Li>
 						
-						<Li onClick={() => navigate("/paymentMethod")}>
+						<Li id="buttonMetodosPago" onClick={() => navigate("/paymentMethod")}>
 							<Link>Métodos de pago</Link>
 							<PaymentIcon/>
 						</Li>
 
-						<Li onClick={() => navigate('/direcciones')}>
+						<Li id="buttonDirecciones" onClick={() => navigate('/direcciones')}>
 							<Link>Direcciones de entrega</Link>
 							<PinUser/>
 						</Li>
 					</Section>
 
 					<Section>
-						<Li onClick={() => navigate("/covid19")}>
+						<Li id="buttonCovid" onClick={() => navigate("/covid19")}>
 							<Link>COVID-19: Centro de seguridad</Link>
 							<SurgicalMask/>
 						</Li>
 
-						<Li>
+						<Li id="buttonSucursales">
 							<Link>Sucursales</Link>
 							<PinMap/>
 						</Li>
 					</Section>
 
 					<Section onClick={logOut}>
-						<Li>
+						<Li id="buttonCerrarSesion">
 							<Link>Cerrar Sesion</Link>
 							<LogOutIcon />
 						</Li>
