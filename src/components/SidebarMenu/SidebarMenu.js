@@ -61,11 +61,6 @@ const SidebarMenu = ({estado}) =>{
 							<Link>COVID-19: Centro de seguridad</Link>
 							<SurgicalMask/>
 						</Li>
-
-						<Li id="buttonSucursales">
-							<Link>Sucursales</Link>
-							<PinMap/>
-						</Li>
 					</Section>
 
 					<Section onClick={logOut}>
