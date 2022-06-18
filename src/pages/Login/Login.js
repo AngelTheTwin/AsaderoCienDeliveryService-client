@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { createUsuario, login } from '../../data-access/usuarioAccess';
+import { stringToHash } from '../../utils/hash';
 import {
 	BackButton,
 	BackIcon,
@@ -103,9 +104,10 @@ export function FormularioLogin(props) {
 		}
 		const toastLogin = toast.loading('Iniciando Sesión', toastProperties)
 		try {
+			let hashedContraseña = stringToHash(contraseña)
 			const usuario = await login({
 				correo,
-				contraseña
+				contraseña: hashedContraseña
 			})
 			localStorage.setItem('usuario', JSON.stringify(usuario))
 			if (usuario.tipoUsuario === 'consumidor') {
@@ -212,6 +214,7 @@ function FormularioRegistro(props) {
 		try {
 			const mensaje = await createUsuario({
 				...formData,
+				contraseña: stringToHash(formData.contraseña),
 				telefono
 			})
 			toast.update(toastRegistro, {
